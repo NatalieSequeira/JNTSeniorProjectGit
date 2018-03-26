@@ -2,16 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/deannasequeira/Documents/JNTSeniorProjectXCode/JNTSeniorProjectXCode/CustomCell.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/deannasequeira/Documents/JNTSeniorProjectXCode/JNTSeniorProjectXCode/RepeatController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/deannasequeira/Documents/JNTSeniorProjectXCode/JNTSeniorProjectXCode/DateCellTableViewController.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/deannasequeira/Documents/JNTSeniorProjectXCode/JNTSeniorProjectXCode/AddSchedViewController.swift">
+      location = "group:">
    </FileRef>
    <FileRef
       location = "group:JNTSeniorProjectXCode.xcodeproj">
