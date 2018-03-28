@@ -8,9 +8,9 @@
 
 import UIKit
 import EventKit
+import os.log
 
 class AddEventViewController: UIViewController {
-    
     
     // DEFAULT FUNCTIONS
     override func viewDidLoad() {
@@ -98,8 +98,8 @@ class AddEventViewController: UIViewController {
                 actualEvent.startDate = startDate
                 actualEvent.endDate = endDate
                 actualEvent.notes = description!
-                actualEvent.calendar = eventStore.defaultCalendarForNewEvents
-                
+                actualEvent.calendar = eventStore.calendar(withIdentifier: propertyKey.calID)
+
                 do{
                     try eventStore.save(actualEvent, span: .thisEvent)
                 }
