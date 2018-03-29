@@ -13,8 +13,6 @@ class SecondViewController: UIViewController {
 
     let formatter = DateFormatter()
     
-
-    
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
     
