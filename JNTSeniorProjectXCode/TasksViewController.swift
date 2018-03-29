@@ -7,19 +7,24 @@
 
 import UIKit
 import EventKit
+import CoreData
 
+var calID = " "
 
 class TasksViewController: UIViewController{
     
-   
-    
-    var calendarID:String = " "
-    
     let eventStore = EKEventStore()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //CoreData init
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "CalendarID", in: context)
+        let calenID = NSManagedObject(entity: entity!, insertInto: context)
+        
         
         eventStore.requestAccess(to: EKEntityType.event) {
             (accessYes, accessNo) in
@@ -38,7 +43,7 @@ class TasksViewController: UIViewController{
             let newCalendar = EKCalendar(for:EKEntityType.event, eventStore:self.eventStore)
             newCalendar.title="evenCal"
             print(newCalendar.calendarIdentifier)
-            propertyKey.calID = newCalendar.calendarIdentifier
+            calID = newCalendar.calendarIdentifier
             newCalendar.source = self.eventStore.defaultCalendarForNewEvents?.source
             do{
             try self.eventStore.saveCalendar(newCalendar, commit:true)
@@ -52,27 +57,44 @@ class TasksViewController: UIViewController{
             else{
                 print("Did not have permission to use Calender")
             }
-            
+        }
             
 
         // Do any additional setup after loading the view.
-    }
         
+        calenID.setValue(calID, forKey: "calendarID")
         
+        do{
+            try context.save()
+          } catch {
+            print("Failed Saving")
+          }
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CalendarID")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject]{
+              calID = data.value(forKey: "calendarID") as! String
+            }
+        } catch {
+            print("Failed")
+            
         }
     
-
+    
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
  
     }
-    
 }
 
-struct propertyKey
+struct CalendarIDStruct
 {
-    static var calID = ""
+    static var calendarID = calID
 }
 

@@ -9,8 +9,11 @@
 import UIKit
 import EventKit
 import os.log
+import CoreData
+
 
 class AddEventViewController: UIViewController {
+    
     
     // DEFAULT FUNCTIONS
     override func viewDidLoad() {
@@ -55,11 +58,6 @@ class AddEventViewController: UIViewController {
     
     
     
-    
-
-    
-    
-    
     @IBAction func bringUpDatePicker(_ sender: Any) {
         
         myDatePicker.isHidden = false
@@ -98,7 +96,7 @@ class AddEventViewController: UIViewController {
                 actualEvent.startDate = startDate
                 actualEvent.endDate = endDate
                 actualEvent.notes = description!
-                actualEvent.calendar = eventStore.calendar(withIdentifier: propertyKey.calID)
+                actualEvent.calendar = eventStore.calendar(withIdentifier: CalendarIDStruct.calendarID)
 
                 do{
                     try eventStore.save(actualEvent, span: .thisEvent)
