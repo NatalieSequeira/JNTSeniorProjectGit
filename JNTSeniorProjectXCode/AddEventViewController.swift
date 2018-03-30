@@ -97,6 +97,7 @@ class AddEventViewController: UIViewController {
                 actualEvent.endDate = endDate
                 actualEvent.notes = description!
                 actualEvent.calendar = eventStore.calendar(withIdentifier: CalendarIDStruct.calendarID)
+                print(CalendarIDStruct.calendarID)
 
                 do{
                     try eventStore.save(actualEvent, span: .thisEvent)

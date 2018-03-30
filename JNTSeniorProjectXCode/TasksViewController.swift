@@ -34,14 +34,14 @@ class TasksViewController: UIViewController{
         let calendars = self.eventStore.calendars(for: EKEntityType.event) as [EKCalendar]
         var exists = false
         for calendar in calendars {
-            if calendar.title == "evenCal" {
+            if calendar.title == "AppCalendar" {
                 exists = true
             }
         }
         
         if exists == false {
             let newCalendar = EKCalendar(for:EKEntityType.event, eventStore:self.eventStore)
-            newCalendar.title="evenCal"
+            newCalendar.title="AppCalendar"
             print(newCalendar.calendarIdentifier)
             calID = newCalendar.calendarIdentifier
             newCalendar.source = self.eventStore.defaultCalendarForNewEvents?.source
@@ -59,10 +59,8 @@ class TasksViewController: UIViewController{
             }
         }
             
-
-        // Do any additional setup after loading the view.
         
-        calenID.setValue(calID, forKey: "calendarID")
+        calenID.setValue(calID, forKey: "appleCalendarID")
         
         do{
             try context.save()
@@ -76,7 +74,8 @@ class TasksViewController: UIViewController{
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject]{
-              calID = data.value(forKey: "calendarID") as! String
+              calID = data.value(forKeyPath: "appleCalendarID") as! String
+              print(calID)
             }
         } catch {
             print("Failed")
