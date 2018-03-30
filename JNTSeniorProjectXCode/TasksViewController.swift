@@ -9,7 +9,7 @@ import UIKit
 import EventKit
 import CoreData
 
-var calID = " "
+var calID = "null"
 
 class TasksViewController: UIViewController{
     
@@ -36,6 +36,7 @@ class TasksViewController: UIViewController{
         for calendar in calendars {
             if calendar.title == "AppCalendar" {
                 exists = true
+                calID = calendar.calendarIdentifier
             }
         }
         
@@ -64,6 +65,7 @@ class TasksViewController: UIViewController{
         
         do{
             try context.save()
+            print("Saved ID: " + calID)
           } catch {
             print("Failed Saving")
           }
@@ -75,7 +77,7 @@ class TasksViewController: UIViewController{
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject]{
               calID = data.value(forKeyPath: "appleCalendarID") as! String
-              print(calID)
+                print("Loaded: " + calID)
             }
         } catch {
             print("Failed")

@@ -18,6 +18,7 @@ class AddEventViewController: UIViewController {
     // DEFAULT FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Current ID: " + CalendarIDStruct.calendarID)
         // Do any additional setup after loading the view, typically from a nib.
         myDatePicker.isHidden = true
     }
