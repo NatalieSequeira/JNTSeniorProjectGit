@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		59D11198F4474E6C563A57C1 /* Pods_JNTSeniorProjectXCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 746F62A72F2FD6C61678F336 /* Pods_JNTSeniorProjectXCode.framework */; };
 		6F079C4D206DA6CC00C3E477 /* JNTSeniorProjectXCode.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F079C4B206DA6CC00C3E477 /* JNTSeniorProjectXCode.xcdatamodeld */; };
+		6F079C532070082600C3E477 /* TaskObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F079C522070082600C3E477 /* TaskObject.swift */; };
 		6F89B694206C3AF9001E2E3B /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F89B693206C3AF9001E2E3B /* TasksViewController.swift */; };
 		CE14D6682043A7A700AD5C9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14D6672043A7A700AD5C9F /* AppDelegate.swift */; };
 		CE14D66A2043A7A700AD5C9F /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14D6692043A7A700AD5C9F /* AddEventViewController.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		1A37D458FE92042A35507D26 /* Pods-JNTSeniorProjectXCode.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JNTSeniorProjectXCode.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JNTSeniorProjectXCode/Pods-JNTSeniorProjectXCode.debug.xcconfig"; sourceTree = "<group>"; };
 		6F079C4C206DA6CC00C3E477 /* JNTSeniorProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JNTSeniorProject.xcdatamodel; sourceTree = "<group>"; };
+		6F079C522070082600C3E477 /* TaskObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskObject.swift; sourceTree = "<group>"; };
 		6F89B693206C3AF9001E2E3B /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		746F62A72F2FD6C61678F336 /* Pods_JNTSeniorProjectXCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JNTSeniorProjectXCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE14D6642043A7A700AD5C9F /* JNTSeniorProjectXCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JNTSeniorProjectXCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 				E639B6F3206004000083BACB /* DateCellTableViewController.swift */,
 				E6EF6785206142160095EC1F /* RepeatController.swift */,
 				E6EF678720635CDD0095EC1F /* CustomCell.swift */,
+				6F079C522070082600C3E477 /* TaskObject.swift */,
 				CE14D66D2043A7A700AD5C9F /* Main.storyboard */,
 				CE14D6702043A7A700AD5C9F /* Assets.xcassets */,
 				CE14D6722043A7A700AD5C9F /* LaunchScreen.storyboard */,
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6EF6786206142160095EC1F /* RepeatController.swift in Sources */,
+				6F079C532070082600C3E477 /* TaskObject.swift in Sources */,
 				6F89B694206C3AF9001E2E3B /* TasksViewController.swift in Sources */,
 				CE14D66C2043A7A700AD5C9F /* CalendarViewController.swift in Sources */,
 				E639B6F4206004000083BACB /* DateCellTableViewController.swift in Sources */,
