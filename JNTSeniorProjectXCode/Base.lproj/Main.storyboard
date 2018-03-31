@@ -54,16 +54,16 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Information:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eb-PK-la3">
                                 <rect key="frame" x="52" y="27" width="271" height="37"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="8Bi-Md-ePF"/>
+                                    <constraint firstAttribute="height" constant="37" id="DPj-hs-sxM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AW7-0E-Xc5">
-                                <rect key="frame" x="144" y="196" width="87" height="22"/>
+                                <rect key="frame" x="96" y="196" width="183" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="AvK-yt-a3b"/>
+                                    <constraint firstAttribute="height" constant="22" id="xRh-1x-sFU"/>
                                 </constraints>
                                 <state key="normal" title="Add Task"/>
                                 <connections>
@@ -73,23 +73,23 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottomMargin" secondItem="ZF1-Cl-Jq7" secondAttribute="bottom" constant="-12" id="2tK-OY-8Kd"/>
-                            <constraint firstItem="itm-nZ-Tk0" firstAttribute="top" secondItem="a5E-KU-VlM" secondAttribute="bottom" constant="26" id="83d-Qp-ayg"/>
-                            <constraint firstItem="a5E-KU-VlM" firstAttribute="trailing" secondItem="3qu-k7-en8" secondAttribute="trailing" id="8OT-rM-1u3"/>
-                            <constraint firstItem="ZF1-Cl-Jq7" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="BZt-rd-vod"/>
-                            <constraint firstItem="AW7-0E-Xc5" firstAttribute="centerX" secondItem="3qu-k7-en8" secondAttribute="centerX" id="F3i-tB-wHp"/>
-                            <constraint firstItem="1eb-PK-la3" firstAttribute="trailing" secondItem="a5E-KU-VlM" secondAttribute="trailing" id="NIW-it-9wf"/>
-                            <constraint firstItem="3qu-k7-en8" firstAttribute="top" secondItem="itm-nZ-Tk0" secondAttribute="bottom" constant="29" id="R0P-0G-6Ry"/>
-                            <constraint firstAttribute="trailing" secondItem="ZF1-Cl-Jq7" secondAttribute="trailing" id="TKK-St-7LD"/>
-                            <constraint firstItem="3qu-k7-en8" firstAttribute="top" secondItem="AW7-0E-Xc5" secondAttribute="bottom" constant="8" symbolic="YES" id="XR8-qR-fQW"/>
-                            <constraint firstItem="1eb-PK-la3" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="7" id="ZMX-OY-bWY"/>
-                            <constraint firstItem="a5E-KU-VlM" firstAttribute="top" secondItem="1eb-PK-la3" secondAttribute="bottom" constant="41" id="a4h-xA-vAy"/>
-                            <constraint firstItem="1eb-PK-la3" firstAttribute="leading" secondItem="a5E-KU-VlM" secondAttribute="leading" id="c3R-sa-igu"/>
-                            <constraint firstItem="AW7-0E-Xc5" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="144" id="cCE-zI-xcT"/>
-                            <constraint firstItem="3qu-k7-en8" firstAttribute="centerX" secondItem="ZF1-Cl-Jq7" secondAttribute="centerX" id="gqL-PF-QRG"/>
-                            <constraint firstItem="1eb-PK-la3" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="52" id="hhu-uP-ayJ"/>
-                            <constraint firstItem="a5E-KU-VlM" firstAttribute="leading" secondItem="3qu-k7-en8" secondAttribute="leading" id="lPc-jA-MgI"/>
-                            <constraint firstItem="itm-nZ-Tk0" firstAttribute="centerX" secondItem="AW7-0E-Xc5" secondAttribute="centerX" id="xVn-gh-4BV"/>
+                            <constraint firstItem="a5E-KU-VlM" firstAttribute="top" secondItem="1eb-PK-la3" secondAttribute="bottom" constant="41" id="5fG-LD-koi"/>
+                            <constraint firstAttribute="trailing" secondItem="ZF1-Cl-Jq7" secondAttribute="trailing" id="6ty-Ow-51Z"/>
+                            <constraint firstItem="AW7-0E-Xc5" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="96" id="6wy-wn-aCZ"/>
+                            <constraint firstItem="a5E-KU-VlM" firstAttribute="trailing" secondItem="3qu-k7-en8" secondAttribute="trailing" id="8Rk-wf-YhC"/>
+                            <constraint firstItem="1eb-PK-la3" firstAttribute="trailing" secondItem="a5E-KU-VlM" secondAttribute="trailing" id="8ue-G0-V54"/>
+                            <constraint firstItem="itm-nZ-Tk0" firstAttribute="centerX" secondItem="AW7-0E-Xc5" secondAttribute="centerX" id="Ba3-eb-3yd"/>
+                            <constraint firstItem="1eb-PK-la3" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="52" id="Dxs-QR-Fkl"/>
+                            <constraint firstItem="ZF1-Cl-Jq7" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="RHf-mz-Kat"/>
+                            <constraint firstItem="a5E-KU-VlM" firstAttribute="leading" secondItem="3qu-k7-en8" secondAttribute="leading" id="RMF-Dz-pZO"/>
+                            <constraint firstItem="1eb-PK-la3" firstAttribute="leading" secondItem="a5E-KU-VlM" secondAttribute="leading" id="TCi-Et-G1C"/>
+                            <constraint firstItem="1eb-PK-la3" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="7" id="Tb7-dY-jKk"/>
+                            <constraint firstItem="3qu-k7-en8" firstAttribute="centerX" secondItem="ZF1-Cl-Jq7" secondAttribute="centerX" id="fM0-rO-dKY"/>
+                            <constraint firstItem="AW7-0E-Xc5" firstAttribute="centerX" secondItem="3qu-k7-en8" secondAttribute="centerX" id="k24-Ok-uW9"/>
+                            <constraint firstItem="itm-nZ-Tk0" firstAttribute="top" secondItem="a5E-KU-VlM" secondAttribute="bottom" constant="26" id="ohW-ZV-LcA"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ZF1-Cl-Jq7" secondAttribute="bottom" constant="-12" id="vFx-pe-9HX"/>
+                            <constraint firstItem="3qu-k7-en8" firstAttribute="top" secondItem="AW7-0E-Xc5" secondAttribute="bottom" constant="8" symbolic="YES" id="wEV-ZI-DIZ"/>
+                            <constraint firstItem="3qu-k7-en8" firstAttribute="top" secondItem="itm-nZ-Tk0" secondAttribute="bottom" constant="29" id="zt8-ye-hKs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1" y="1666"/>
+            <point key="canvasLocation" x="-2.3999999999999999" y="1665.5172413793105"/>
         </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="wg7-f3-ORb">

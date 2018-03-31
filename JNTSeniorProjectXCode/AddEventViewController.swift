@@ -60,7 +60,7 @@ class AddEventViewController: UIViewController {
     
     
     @IBAction func bringUpDatePicker(_ sender: Any) {
-        
+        view.endEditing(true)
         myDatePicker.isHidden = false
     }
     
