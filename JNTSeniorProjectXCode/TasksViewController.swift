@@ -43,8 +43,9 @@ class TasksViewController: UIViewController{
         if exists == false {
             let newCalendar = EKCalendar(for:EKEntityType.event, eventStore:self.eventStore)
             newCalendar.title="AppCalendar"
-            print(newCalendar.calendarIdentifier)
+            //print(newCalendar.calendarIdentifier)
             calID = newCalendar.calendarIdentifier
+            print("48 - Current calID" + calID)
             newCalendar.source = self.eventStore.defaultCalendarForNewEvents?.source
             do{
             try self.eventStore.saveCalendar(newCalendar, commit:true)
@@ -58,31 +59,34 @@ class TasksViewController: UIViewController{
             else{
                 print("Did not have permission to use Calender")
             }
-        }
             
-        
-        calenID.setValue(calID, forKey: "appleCalendarID")
-        
-        do{
-            try context.save()
-            print("Saved ID: " + calID)
-          } catch {
-            print("Failed Saving")
-          }
-        
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CalendarID")
-        request.returnsObjectsAsFaults = false
-        
-        do {
-            let result = try context.fetch(request)
-            for data in result as! [NSManagedObject]{
-              calID = data.value(forKeyPath: "appleCalendarID") as! String
-                print("Loaded: " + calID)
+            
+            print("64 - Current calID" + calID)
+            calenID.setValue(calID, forKey: "appleCalendarID")
+            
+            do{
+                try context.save()
+                print("69 - Saved ID: " + calID)
+            } catch {
+                print("Failed Saving")
             }
-        } catch {
-            print("Failed")
             
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CalendarID")
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let result = try context.fetch(request)
+                for data in result as! [NSManagedObject]{
+                    calID = data.value(forKeyPath: "appleCalendarID") as! String
+                    print("81 - Loaded: " + calID)
+                }
+            } catch {
+                print("Failed")
+                
+            }
         }
+            
+        
     
     
     }
