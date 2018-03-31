@@ -318,7 +318,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal">
-                                    <string key="title">Repeat											&gt;</string>
+                                    <string key="title">Repeat                                            &gt;</string>
                                 </state>
                                 <connections>
                                     <segue destination="tNe-Ca-elz" kind="presentation" id="Ope-po-mLe"/>
