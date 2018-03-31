@@ -4,7 +4,7 @@
 //
 
 import Foundation
-
+//Object to hold user events and schedule
 class TaskObject
 {
     var taskDate:Date!
@@ -13,6 +13,7 @@ class TaskObject
     //var taskPriority:Int!
 }
 
+//Dictionary with a date as its key, and whatever events on that day will be stored
 struct TaskObjectDic
 {
     static var taskDic = [String:Array<TaskObject>]()

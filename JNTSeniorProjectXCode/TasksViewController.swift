@@ -25,7 +25,7 @@ class TasksViewController: UIViewController{
         let entity = NSEntityDescription.entity(forEntityName: "CalendarID", in: context)
         let calenID = NSManagedObject(entity: entity!, insertInto: context)
         
-        
+        //Request access to user's calendar
         eventStore.requestAccess(to: EKEntityType.event) {
             (accessYes, accessNo) in
             
@@ -60,7 +60,7 @@ class TasksViewController: UIViewController{
                 print("Did not have permission to use Calender")
             }
             
-            
+            //Store the calendars ID as persistent data
             print("64 - Current calID" + calID)
             calenID.setValue(calID, forKey: "appleCalendarID")
             
@@ -71,6 +71,7 @@ class TasksViewController: UIViewController{
                 print("Failed Saving")
             }
             
+            //Fetch the persistent data, then store in global variable
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "CalendarID")
             request.returnsObjectsAsFaults = false
             
@@ -98,6 +99,7 @@ class TasksViewController: UIViewController{
     }
 }
 
+//Store calendar Id in golbal variable
 struct CalendarIDStruct
 {
     static var calendarID = calID

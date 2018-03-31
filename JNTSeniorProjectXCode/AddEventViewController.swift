@@ -155,11 +155,12 @@ class AddEventViewController: UIViewController {
             
         }
         
+        //Create an event object, that will take in the users info for said event
         EventTaskObject.taskDate = myDatePicker.date
         EventTaskObject.taskTitle = userTitle
         EventTaskObject.taskDescription = userDescription
         
-        
+        //If there is already an event for that day's key, add said event into event array. If no event lists on that day, create the array
         if var keyDate = TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)]
         {
         keyDate.append(EventTaskObject)
