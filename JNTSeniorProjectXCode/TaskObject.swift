@@ -1,8 +1,5 @@
-//
-//  TaskObject.swift
-//  JNTSeniorProjectXCode
-//
-//  Created by Thomas Zorn on 3/30/18.
+
+//  Created by Thomas Zorn on 3/31/18.
 //  Copyright © 2018 Tom, Jack, and Natalie. All rights reserved.
 //
 
@@ -20,3 +17,4 @@ struct TaskObjectDic
 {
     static var taskDic = [String:Array<TaskObject>]()
 }
+
