@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 import JTAppleCalendar
 
 class SecondViewController: UIViewController {
@@ -86,4 +87,24 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
     
     
 }
+
+/*extension SecondViewController
+{
+    
+    func getAppleCalendarEvents() -> [Date:String] {
+        formatter.dateFormat = "yyyy MM dd"
+        
+        let eventStore = EKEventStore()
+
+        let calendars = eventStore.calendars(for: EKEntityType.event) as [EKCalendar]
+        
+        for calendar in calendars {
+            if calendar.title == "AppCalendar" {
+                
+            }
+        }
+
+    }
+    
+}*/
 

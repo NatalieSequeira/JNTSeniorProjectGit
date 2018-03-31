@@ -129,12 +129,14 @@ class AddEventViewController: UIViewController {
     // Add the Event to the Calendar
     @IBAction func buttonPressed(_ sender: Any) {
         
+        let EventTaskObject = TaskObject()
+        
         let myDateFormatter = DateFormatter()
         let myLocale = NSLocale.autoupdatingCurrent;
         
         myDateFormatter.locale = myLocale
         
-        myDateFormatter.dateFormat = "MM dd, YYYY"
+        myDateFormatter.dateFormat = "yyyy MM dd"
         
         
         
@@ -153,6 +155,23 @@ class AddEventViewController: UIViewController {
             
         }
         
+        EventTaskObject.taskDate = myDatePicker.date
+        EventTaskObject.taskTitle = userTitle
+        EventTaskObject.taskDescription = userDescription
+        
+        
+        if var keyDate = TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)]
+        {
+        keyDate.append(EventTaskObject)
+        TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = keyDate
+        } else {
+            TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
+        }
+        
+        for(datekey,eventtask) in TaskObjectDic.taskDic
+        {
+            print("Date: \(datekey): \(eventtask)")
+        }
     }
     
     
