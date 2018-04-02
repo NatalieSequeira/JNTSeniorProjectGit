@@ -8,7 +8,10 @@
 
 import Foundation
 
-
+class SaveFetchTaskDictionary
+{
+    
+}
 
 
 
