@@ -106,6 +106,21 @@
             </objects>
             <point key="canvasLocation" x="-2.3999999999999999" y="1665.5172413793105"/>
         </scene>
+        <!--Date Dets View Controller-->
+        <scene sceneID="hkK-Pd-6DG">
+            <objects>
+                <viewController storyboardIdentifier="Date Dets View Controller" id="Jcg-Ac-cuM" customClass="DateDetsViewController" customModule="JNTSeniorProjectXCode" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eok-mX-6zp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="sdy-Ff-wte"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j6n-s8-fIM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-797" y="805"/>
+        </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -317,9 +332,7 @@
                                 <rect key="frame" x="0.0" y="602" width="375" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal">
-                                    <string key="title">Repeat                                            &gt;</string>
-                                </state>
+                                <state key="normal" title="Repeat                                            &gt;"/>
                                 <connections>
                                     <segue destination="tNe-Ca-elz" kind="presentation" id="Ope-po-mLe"/>
                                 </connections>

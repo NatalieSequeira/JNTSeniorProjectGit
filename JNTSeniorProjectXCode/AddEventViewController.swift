@@ -59,6 +59,8 @@ class AddEventViewController: UIViewController {
     
     
     
+    
+    
     @IBAction func bringUpDatePicker(_ sender: Any) {
         view.endEditing(true)
         myDatePicker.isHidden = false
@@ -83,6 +85,9 @@ class AddEventViewController: UIViewController {
     
     //start of func AddEvent
     func addEvent(title: String!, startDate: Date, endDate: Date, description: String!) {
+        
+        
+        
         
         let eventStore = EKEventStore()
         
@@ -122,10 +127,6 @@ class AddEventViewController: UIViewController {
     
     
     
-    
-    
-    
-    
     // Add the Event to the Calendar
     @IBAction func buttonPressed(_ sender: Any) {
         
@@ -155,6 +156,7 @@ class AddEventViewController: UIViewController {
             
         }
         
+        
         //Create an event object, that will take in the users info for said event
         EventTaskObject.taskDate = myDatePicker.date
         EventTaskObject.taskTitle = userTitle
@@ -169,10 +171,6 @@ class AddEventViewController: UIViewController {
             TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
         }
         
-        for(datekey,eventtask) in TaskObjectDic.taskDic
-        {
-            print("Date: \(datekey): \(eventtask)")
-        }
     }
     
     

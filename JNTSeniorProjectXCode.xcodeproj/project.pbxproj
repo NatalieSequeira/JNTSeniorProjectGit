@@ -11,6 +11,8 @@
 		6F079C4D206DA6CC00C3E477 /* JNTSeniorProjectXCode.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6F079C4B206DA6CC00C3E477 /* JNTSeniorProjectXCode.xcdatamodeld */; };
 		6F079C4F206F1B9900C3E477 /* TaskObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F079C4E206F1B9900C3E477 /* TaskObject.swift */; };
 		6F89B694206C3AF9001E2E3B /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F89B693206C3AF9001E2E3B /* TasksViewController.swift */; };
+		6FF73F2E2072D75A000307CF /* DateDetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF73F2D2072D75A000307CF /* DateDetsViewController.swift */; };
+		6FF73F302072E737000307CF /* SaveFetchTaskDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF73F2F2072E737000307CF /* SaveFetchTaskDictionary.swift */; };
 		CE14D6682043A7A700AD5C9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14D6672043A7A700AD5C9F /* AppDelegate.swift */; };
 		CE14D66A2043A7A700AD5C9F /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14D6692043A7A700AD5C9F /* AddEventViewController.swift */; };
 		CE14D66C2043A7A700AD5C9F /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14D66B2043A7A700AD5C9F /* CalendarViewController.swift */; };
@@ -47,6 +49,8 @@
 		6F079C4C206DA6CC00C3E477 /* JNTSeniorProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JNTSeniorProject.xcdatamodel; sourceTree = "<group>"; };
 		6F079C4E206F1B9900C3E477 /* TaskObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskObject.swift; sourceTree = "<group>"; };
 		6F89B693206C3AF9001E2E3B /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		6FF73F2D2072D75A000307CF /* DateDetsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateDetsViewController.swift; sourceTree = "<group>"; };
+		6FF73F2F2072E737000307CF /* SaveFetchTaskDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFetchTaskDictionary.swift; sourceTree = "<group>"; };
 		746F62A72F2FD6C61678F336 /* Pods_JNTSeniorProjectXCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JNTSeniorProjectXCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE14D6642043A7A700AD5C9F /* JNTSeniorProjectXCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JNTSeniorProjectXCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE14D6672043A7A700AD5C9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				E6EF6785206142160095EC1F /* RepeatController.swift */,
 				E6EF678720635CDD0095EC1F /* CustomCell.swift */,
 				6F079C4E206F1B9900C3E477 /* TaskObject.swift */,
+				6FF73F2D2072D75A000307CF /* DateDetsViewController.swift */,
+				6FF73F2F2072E737000307CF /* SaveFetchTaskDictionary.swift */,
 				CE14D66D2043A7A700AD5C9F /* Main.storyboard */,
 				CE14D6722043A7A700AD5C9F /* LaunchScreen.storyboard */,
 				CE14D6752043A7A700AD5C9F /* Info.plist */,
@@ -370,7 +376,9 @@
 				CE14D66C2043A7A700AD5C9F /* CalendarViewController.swift in Sources */,
 				E639B6F4206004000083BACB /* DateCellTableViewController.swift in Sources */,
 				CE14D6682043A7A700AD5C9F /* AppDelegate.swift in Sources */,
+				6FF73F302072E737000307CF /* SaveFetchTaskDictionary.swift in Sources */,
 				6F079C4D206DA6CC00C3E477 /* JNTSeniorProjectXCode.xcdatamodeld in Sources */,
+				6FF73F2E2072D75A000307CF /* DateDetsViewController.swift in Sources */,
 				E6258FCA205F546F007F928E /* AddSchedViewController.swift in Sources */,
 				E6EF678820635CDE0095EC1F /* CustomCell.swift in Sources */,
 				CE14D66A2043A7A700AD5C9F /* AddEventViewController.swift in Sources */,

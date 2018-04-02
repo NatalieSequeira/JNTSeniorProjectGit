@@ -4,18 +4,18 @@
 //
 
 import Foundation
+import CoreData
 //Object to hold user events and schedule
-class TaskObject
+class TaskObject: NSManagedObject
 {
     var taskDate:Date!
     var taskTitle:String!
     var taskDescription:String!
     //var taskPriority:Int!
+    
 }
 
-//Dictionary with a date as its key, and whatever events on that day will be stored
-struct TaskObjectDic
-{
-    static var taskDic = [String:Array<TaskObject>]()
-}
+
+
+
 

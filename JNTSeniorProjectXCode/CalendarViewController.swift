@@ -81,6 +81,21 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         guard let validCell = cell as? CustomCell else {return}
         
         validCell.selectedView.isHidden = false
+        print(formatter.string(from: date))
+        dateKey.key = formatter.string(from: date)
+        
+        if TaskObjectDic.taskDic[formatter.string(from: date)] != nil
+        {
+            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Date Dets View Controller") as UIViewController!
+            let navigation = UINavigationController(rootViewController: popoverContent!)
+            navigation.modalPresentationStyle = UIModalPresentationStyle.popover
+            let popover = navigation.popoverPresentationController
+            popover?.delegate = self as? UIPopoverPresentationControllerDelegate
+            popover?.sourceView = self.view
+            
+            self.present(navigation, animated: true, completion: nil)
+            
+        }
         
     }
     
@@ -88,23 +103,8 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
     
 }
 
-/*extension SecondViewController
+struct dateKey
 {
-    
-    func getAppleCalendarEvents() -> [Date:String] {
-        formatter.dateFormat = "yyyy MM dd"
-        
-        let eventStore = EKEventStore()
-
-        let calendars = eventStore.calendars(for: EKEntityType.event) as [EKCalendar]
-        
-        for calendar in calendars {
-            if calendar.title == "AppCalendar" {
-                
-            }
-        }
-
-    }
-    
-}*/
+    static var key:String!
+}
 

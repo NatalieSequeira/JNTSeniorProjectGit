@@ -3,7 +3,17 @@
     <entity name="CalendarID" representedClassName="CalendarID" syncable="YES" codeGenerationType="class">
         <attribute name="appleCalendarID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="DictionaryKeys" representedClassName="DictionaryKeys" syncable="YES" codeGenerationType="class">
+        <attribute name="dictKey" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DictionaryValues" representedClassName="DictionaryValues" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CalendarID" positionX="-54" positionY="-9" width="128" height="60"/>
+        <element name="DictionaryKeys" positionX="-45" positionY="9" width="128" height="60"/>
+        <element name="DictionaryValues" positionX="-18" positionY="36" width="128" height="90"/>
     </elements>
 </model>
