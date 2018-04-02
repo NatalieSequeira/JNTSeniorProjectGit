@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import CoreData
+
 
 class SaveFetchTaskDictionary
 {
-    
+    var tDictionary = [String:Array<TaskObject>]()
 }
 
 
