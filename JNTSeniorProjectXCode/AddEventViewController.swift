@@ -171,6 +171,43 @@ class AddEventViewController: UIViewController {
             TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
         }
         
+        let nsDict = TaskObjectDic.taskDic as NSDictionary
+        
+        //CoreData init
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context1 = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntityName: "NSDictSave", in: context1)
+        let nsDictSF = NSManagedObject(entity: entity!, insertInto: context1)
+        
+        nsDictSF.setValue(nsDict, forKey: "nsdict")
+        
+        do{
+            try context1.save()
+            print("187 - Saving Dictionary: \(nsDict as AnyObject)")
+        } catch {
+            print("Failed Saving")
+        }
+        
+        //Fetch the persistent data, then store in global variable
+        /*let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NSDictSave")
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let result = try context1.fetch(request)
+            for data in result as! [NSManagedObject]{
+                let holder = data.value(forKeyPath: "nsdict")
+                TaskObjectDic.taskDic = holder as! [String:Array<TaskObject>]
+                print("202 - Loaded Dictionary")
+                dump(TaskObjectDic.taskDic)
+
+            }
+        } catch {
+            print("Failed")
+        }*/
+        
+        
+        
     }
     
     

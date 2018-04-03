@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17D102" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BlahBlah" representedClassName="Blah" syncable="YES" codeGenerationType="class">
+        <attribute name="taskDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="taskDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taskTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CalendarID" representedClassName="CalendarID" syncable="YES" codeGenerationType="class">
         <attribute name="appleCalendarID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="DictionaryKeys" representedClassName="DictionaryKeys" syncable="YES" codeGenerationType="class">
-        <attribute name="dictKey" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="DictionaryValues" representedClassName="DictionaryValues" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="NSDictSave" representedClassName="NSDictSave" syncable="YES" codeGenerationType="class">
+        <attribute name="nsdict" optional="YES" attributeType="Transformable" syncable="YES"/>
     </entity>
     <elements>
         <element name="CalendarID" positionX="-54" positionY="-9" width="128" height="60"/>
-        <element name="DictionaryKeys" positionX="-45" positionY="9" width="128" height="60"/>
-        <element name="DictionaryValues" positionX="-18" positionY="36" width="128" height="90"/>
+        <element name="NSDictSave" positionX="-18" positionY="36" width="128" height="60"/>
+        <element name="BlahBlah" positionX="9" positionY="63" width="128" height="90"/>
     </elements>
 </model>
