@@ -11,9 +11,7 @@ import EventKit
 import os.log
 import CoreData
 
-
 class AddEventViewController: UIViewController {
-    
     
     // DEFAULT FUNCTIONS
     override func viewDidLoad() {
@@ -130,7 +128,6 @@ class AddEventViewController: UIViewController {
     // Add the Event to the Calendar
     @IBAction func buttonPressed(_ sender: Any) {
         
-        let EventTaskObject = TaskObject()
         
         let myDateFormatter = DateFormatter()
         let myLocale = NSLocale.autoupdatingCurrent;
@@ -158,6 +155,7 @@ class AddEventViewController: UIViewController {
         
         
         //Create an event object, that will take in the users info for said event
+        let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!)
         EventTaskObject.taskDate = myDatePicker.date
         EventTaskObject.taskTitle = userTitle
         EventTaskObject.taskDescription = userDescription
@@ -170,6 +168,12 @@ class AddEventViewController: UIViewController {
         } else {
             TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
         }
+        
+        //To store the data, we must first encode our dictionary with the key "eventDic"
+        let uDefault = UserDefaults.standard
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
+        
+        uDefault.set(encodedData, forKey: "eventDic")
         
     }
     

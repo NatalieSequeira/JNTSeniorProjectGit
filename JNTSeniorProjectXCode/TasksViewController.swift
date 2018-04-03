@@ -86,7 +86,21 @@ class TasksViewController: UIViewController{
                 
             }
         }
-            
+        
+       //When the app launchs, we will check for a dictionary, if there is one, we will fetch it
+        if (UserDefaults.standard.object(forKey: "eventDic") == nil){
+            print("FirstLoad")
+        } else {
+        let decoded = UserDefaults.standard.object(forKey: "eventDic") as! Data
+
+        TaskObjectDic.taskDic = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [String : Array<TaskObject>]
+        }
+        
+        for(ukey,utask) in TaskObjectDic.taskDic
+        {
+            print("Key: \(ukey) Title: \(utask[0].taskTitle)")
+        }
+        
         
     
     
