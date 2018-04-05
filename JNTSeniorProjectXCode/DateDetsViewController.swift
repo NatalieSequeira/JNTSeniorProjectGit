@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DateDetsViewController: UIViewController {
+class DateDetsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,10 @@ class DateDetsViewController: UIViewController {
     }
     
 
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 
