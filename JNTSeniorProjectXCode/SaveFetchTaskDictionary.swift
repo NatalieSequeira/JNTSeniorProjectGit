@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
-class SaveFetchTaskDictionary
+
+class SaveFetchTaskDictionary: UIViewController
 {
     
 }

@@ -15,18 +15,47 @@ class SecondViewController: UIViewController {
     let formatter = DateFormatter()
     
     @IBOutlet weak var calendarView: JTAppleCalendarView!
-    
+    @IBOutlet weak var month: UILabel!
+    @IBOutlet weak var year: UILabel!
+
     
     // Extra code added to the default viewDidLoad func
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendarView()
+        calendarView.scrollToDate( Date() )
+    }
+    
+    func handleCelltextColor(view: JTAppleCell?, cellState: CellState)
+    {
+        guard let validCell = view as? CustomCell else {return}
         
+        if cellState.dateBelongsTo == .thisMonth
+        {
+            validCell.dateLabel.textColor = UIColor.black
+        } else {
+            validCell.dateLabel.textColor = UIColor.gray
+        }
+    }
+    
+    func setUpViewsOfCalendar(from visibleDates: DateSegmentInfo)
+    {
+        let date = visibleDates.monthDates.first!.date
+        
+        self.formatter.dateFormat = "yyyy"
+        self.year.text = formatter.string(from: date)
+        
+        self.formatter.dateFormat = "MMMM"
+        self.month.text = formatter.string(from: date)
     }
     
     func setupCalendarView(){
         // calendarView.minimumLineSpacing = 0
         // calendarView.minimumInteritemSpacing = 0
+        
+        calendarView.visibleDates { visibleDates in
+            self.setUpViewsOfCalendar(from: visibleDates)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,7 +73,7 @@ extension SecondViewController: JTAppleCalendarViewDataSource{
         
         
     }
-    
+
     
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters{
@@ -52,15 +81,16 @@ extension SecondViewController: JTAppleCalendarViewDataSource{
         formatter.timeZone = Calendar.current.timeZone
         formatter.locale = Calendar.current.locale
         
-        let startDate = formatter.date(from: "2018 03 01")!
+        let startDate = formatter.date(from: "2018 01 01")
         let endDate = formatter.date(from: "2030 02 01")!
         
         
-        let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
+        let parameters = ConfigurationParameters(startDate: startDate!, endDate: endDate)
         return parameters
     }
     func sharedFunctionToConfigureCell(myCustomCell: CustomCell, cellState: CellState, date: Date){
         myCustomCell.dateLabel.text = cellState.text
+        
         
     }
     
@@ -70,7 +100,10 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         
+
         let myCustomCell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+        
+        handleCelltextColor(view: myCustomCell, cellState: cellState)
         //myCustomCell.dateLabel.text = cellState.text
         sharedFunctionToConfigureCell(myCustomCell: myCustomCell, cellState: cellState, date: date)
         return myCustomCell
@@ -80,7 +113,8 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState){
         guard let validCell = cell as? CustomCell else {return}
         
-        validCell.selectedView.isHidden = false
+        
+        validCell.selectedView.isHidden = true
         print(formatter.string(from: date))
         dateKey.key = formatter.string(from: date)
         
@@ -97,6 +131,11 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
             
         }
         
+    }
+    
+    
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+        setUpViewsOfCalendar(from: visibleDates)
     }
     
     
