@@ -151,35 +151,31 @@ class AddEventViewController: UIViewController {
             
             self.dismiss(animated: true, completion: nil)
             
+            //Create an event object, that will take in the users info for said event
+            let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!)
+            EventTaskObject.taskDate = myDatePicker.date
+            EventTaskObject.taskTitle = userTitle
+            EventTaskObject.taskDescription = userDescription
+            
+            //If there is already an event for that day's key, add said event into event array. If no event lists on that day, create the array
+            if var keyDate = TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)]
+            {
+                keyDate.append(EventTaskObject)
+                TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = keyDate
+            } else {
+                TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
+            }
+            
+            //To store the data, we must first encode our dictionary with the key "eventDic"
+            let uDefault = UserDefaults.standard
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
+            
+            uDefault.set(encodedData, forKey: "eventDic")
+            
         }
         
-        
-        //Create an event object, that will take in the users info for said event
-        let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!)
-        EventTaskObject.taskDate = myDatePicker.date
-        EventTaskObject.taskTitle = userTitle
-        EventTaskObject.taskDescription = userDescription
-        
-        //If there is already an event for that day's key, add said event into event array. If no event lists on that day, create the array
-        if var keyDate = TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)]
-        {
-        keyDate.append(EventTaskObject)
-        TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = keyDate
-        } else {
-            TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
-        }
-        
-        //To store the data, we must first encode our dictionary with the key "eventDic"
-        let uDefault = UserDefaults.standard
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
-        
-        uDefault.set(encodedData, forKey: "eventDic")
         
     }
-    
-    
-    
-    
     
     
 }
