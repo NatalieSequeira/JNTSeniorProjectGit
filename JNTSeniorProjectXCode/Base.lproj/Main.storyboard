@@ -214,13 +214,19 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C5h-dU-FBa">
-                                                            <rect key="frame" x="-12" y="-28" width="104" height="109"/>
+                                                            <rect key="frame" x="-12" y="-16" width="104" height="97"/>
                                                             <color key="backgroundColor" red="0.69336033707007627" green="0.93216027646074739" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mxS-pF-D4N">
-                                                            <rect key="frame" x="18" y="15" width="45" height="23"/>
+                                                            <rect key="frame" x="18" y="15" width="45" height="35"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mfh-4L-wtc">
+                                                            <rect key="frame" x="37" y="52" width="6" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -231,14 +237,17 @@
                                                     <constraint firstItem="C5h-dU-FBa" firstAttribute="top" secondItem="hFM-20-oSD" secondAttribute="topMargin" constant="-36" id="Iag-9u-j4r"/>
                                                     <constraint firstItem="C5h-dU-FBa" firstAttribute="centerY" secondItem="hFM-20-oSD" secondAttribute="centerY" id="PFB-Or-pdH"/>
                                                     <constraint firstItem="mxS-pF-D4N" firstAttribute="centerX" secondItem="hFM-20-oSD" secondAttribute="centerX" id="PfV-bj-zq3"/>
+                                                    <constraint firstItem="Mfh-4L-wtc" firstAttribute="top" secondItem="mxS-pF-D4N" secondAttribute="bottom" constant="2" id="RrH-UI-eEg"/>
                                                     <constraint firstItem="C5h-dU-FBa" firstAttribute="leading" secondItem="hFM-20-oSD" secondAttribute="leadingMargin" constant="-12" id="Td8-mS-nRy"/>
                                                     <constraint firstItem="C5h-dU-FBa" firstAttribute="centerX" secondItem="mxS-pF-D4N" secondAttribute="centerX" id="YAF-eg-KVA"/>
                                                     <constraint firstItem="mxS-pF-D4N" firstAttribute="top" secondItem="hFM-20-oSD" secondAttribute="topMargin" constant="7" id="f2D-Rw-c2e"/>
                                                     <constraint firstItem="C5h-dU-FBa" firstAttribute="leading" secondItem="hFM-20-oSD" secondAttribute="leadingMargin" constant="-20" id="fJH-cP-5JV"/>
+                                                    <constraint firstItem="Mfh-4L-wtc" firstAttribute="centerX" secondItem="mxS-pF-D4N" secondAttribute="centerX" id="yAB-vG-AhS"/>
                                                     <constraint firstItem="C5h-dU-FBa" firstAttribute="top" secondItem="hFM-20-oSD" secondAttribute="topMargin" constant="-24" id="yVl-Y7-b8I"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="dateLabel" destination="mxS-pF-D4N" id="IeI-NM-dk7"/>
+                                                    <outlet property="eventDotView" destination="Mfh-4L-wtc" id="m1H-6Y-huG"/>
                                                     <outlet property="selectedView" destination="C5h-dU-FBa" id="gkh-pW-4j7"/>
                                                 </connections>
                                             </collectionViewCell>

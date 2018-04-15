@@ -18,25 +18,16 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var year: UILabel!
     
+    let todaysDate = Date()
     
+    
+
     // Extra code added to the default viewDidLoad func
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCalendarView()
         calendarView.scrollToDate( Date() )
-    }
-    
-    func handleCelltextColor(view: JTAppleCell?, cellState: CellState)
-    {
-        guard let validCell = view as? CustomCell else {return}
-        
-        if cellState.dateBelongsTo == .thisMonth
-        {
-            validCell.dateLabel.textColor = UIColor.black
-        } else {
-            validCell.dateLabel.textColor = UIColor.gray
+        setupCalendarView()
         }
-    }
     
     func setUpViewsOfCalendar(from visibleDates: DateSegmentInfo)
     {
@@ -57,7 +48,51 @@ class SecondViewController: UIViewController {
         calendarView.visibleDates { visibleDates in
             self.setUpViewsOfCalendar(from: visibleDates)
         }
-
+        
+    }
+    
+    func configureCell(cell:JTAppleCell?, cellState: CellState)
+    {
+        guard let myCustomCell = cell as? CustomCell else {return}
+        formatter.dateFormat = "yyyy MM dd"
+        
+        handleCelltextColor(cell: myCustomCell, cellState: cellState)
+        handleCellEvents(cell: myCustomCell, cellState: cellState)
+        handleCellSelection(cell: myCustomCell, cellState: cellState)
+    }
+    
+    func handleCelltextColor(cell: CustomCell, cellState: CellState)
+    {
+        //guard let validCell = view as? CustomCell else {return}
+        
+        formatter.dateFormat = "yyyy MM dd"
+        
+        let todaysDateString = formatter.string(from: todaysDate)
+        let monthDateString = formatter.string(from: cellState.date)
+        
+        cell.dateLabel.textColor = cellState.dateBelongsTo == .thisMonth ? UIColor.black : UIColor.gray
+        
+        if todaysDateString == monthDateString{
+            cell.dateLabel.textColor = UIColor.red
+        }
+    }
+    
+    func handleCellEvents(cell: CustomCell, cellState: CellState)
+    {
+        formatter.dateFormat = "yyyy MM dd"
+        let eventDate = cellState.date
+        
+        if TaskObjectDic.taskDic[formatter.string(from: eventDate)] != nil
+        {
+            cell.eventDotView.isHidden = false
+        }else{
+            cell.eventDotView.isHidden = true
+        }
+    }
+    
+    func handleCellSelection(cell: CustomCell, cellState: CellState)
+    {
+        //cell.selectedView.isHidden = cellState.isSelected ? false : true
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,9 +106,8 @@ extension SecondViewController: JTAppleCalendarViewDataSource{
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         
         let myCustomCell = cell as! CustomCell
+        
         sharedFunctionToConfigureCell(myCustomCell: myCustomCell, cellState: cellState, date: date)
-        
-        
     }
     
     
@@ -92,7 +126,6 @@ extension SecondViewController: JTAppleCalendarViewDataSource{
     }
     func sharedFunctionToConfigureCell(myCustomCell: CustomCell, cellState: CellState, date: Date){
         myCustomCell.dateLabel.text = cellState.text
-        
     }
     
 }
@@ -103,11 +136,14 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         
         let myCustomCell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         
-        handleCelltextColor(view: myCustomCell, cellState: cellState)
-
-        //myCustomCell.dateLabel.text = cellState.text
+        configureCell(cell: myCustomCell, cellState: cellState)
+        
         sharedFunctionToConfigureCell(myCustomCell: myCustomCell, cellState: cellState, date: date)
         return myCustomCell
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        configureCell(cell: cell, cellState: cellState)
     }
     
     
@@ -116,13 +152,15 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         formatter.dateFormat = "yyyy MM dd"
         guard let validCell = cell as? CustomCell else {return}
         
+        configureCell(cell: cell, cellState: cellState)
+        
         validCell.selectedView.isHidden = true
         print(formatter.string(from: date))
         dateKey.key = formatter.string(from: date)
         
         if TaskObjectDic.taskDic[formatter.string(from: date)] != nil
         {
-            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Date Dets View Controller") as UIViewController!
+            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Date Dets View Controller") as UIViewController?
             let navigation = UINavigationController(rootViewController: popoverContent!)
             navigation.modalPresentationStyle = UIModalPresentationStyle.popover
             let popover = navigation.popoverPresentationController
@@ -135,10 +173,10 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         
     }
     
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo, cellState: CellState, myCustomCell: CustomCell) {
         setUpViewsOfCalendar(from: visibleDates)
     }
-    
+
 }
 
 struct dateKey
