@@ -13,8 +13,7 @@ import CoreData
 import JTAppleCalendar
 
 class AddEventViewController: UIViewController {
-    
-    // DEFAULT FUNCTIONS
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Current ID: " + CalendarIDStruct.calendarID)
@@ -150,7 +149,7 @@ class AddEventViewController: UIViewController {
         else{
             addEvent(title: userTitle!, startDate: myDatePicker.date, endDate: myDatePicker.date, description: userDescription!)
             
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)            
             
             //Create an event object, that will take in the users info for said event
             let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!)
@@ -172,7 +171,7 @@ class AddEventViewController: UIViewController {
             let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
             
             uDefault.set(encodedData, forKey: "eventDic")
-            
+            addedEvent.added = true
         }
         
         
@@ -180,4 +179,10 @@ class AddEventViewController: UIViewController {
     
     
 }
+
+struct addedEvent
+{
+    static var added = false
+}
+
 

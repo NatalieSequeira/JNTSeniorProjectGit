@@ -20,14 +20,25 @@ class SecondViewController: UIViewController {
     
     let todaysDate = Date()
     
-    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController){
+        calendarView.reloadData()
+    }
 
     // Extra code added to the default viewDidLoad func
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarView.scrollToDate( Date() )
         setupCalendarView()
+        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         }
+    
+    @objc func update()
+    {
+        if (addedEvent.added)
+        {
+            calendarView.reloadData()
+        }
+    }
     
     func setUpViewsOfCalendar(from visibleDates: DateSegmentInfo)
     {
