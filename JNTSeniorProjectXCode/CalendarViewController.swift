@@ -37,6 +37,7 @@ class SecondViewController: UIViewController {
         if (addedEvent.added)
         {
             calendarView.reloadData()
+            addedEvent.added = false
         }
     }
     
