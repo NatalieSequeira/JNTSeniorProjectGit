@@ -154,6 +154,10 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         return myCustomCell
     }
     
+    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
+        setUpViewsOfCalendar(from: visibleDates)
+    }
+    
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         configureCell(cell: cell, cellState: cellState)
     }
@@ -184,11 +188,6 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         }
         
     }
-    
-    func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo, cellState: CellState, myCustomCell: CustomCell) {
-        setUpViewsOfCalendar(from: visibleDates)
-    }
-
 }
 
 struct dateKey

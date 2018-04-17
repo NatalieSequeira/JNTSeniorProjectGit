@@ -8,17 +8,49 @@
 
 import UIKit
 
-class DateDetsViewController: UIViewController {
-
+class DateDetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+   
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var DoneButton: UIButton!
+    
+    var taskArray:Array<TaskObject> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.register(DateDetsTableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        taskArray = TaskObjectDic.taskDic[dateKey.key]!
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(taskArray.count)
+        return taskArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("Heyo")
 
-        // Do any additional setup after loading the view.
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
+        
+        let text = taskArray[indexPath.row].taskTitle
+        
+        cell.taskTitleLabel.text = text
+        
+        return cell
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+//
+    @IBAction func backToCalendar(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
 

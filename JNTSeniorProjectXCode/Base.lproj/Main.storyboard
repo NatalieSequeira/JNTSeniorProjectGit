@@ -109,22 +109,81 @@
         <!--Date Dets View Controller-->
         <scene sceneID="hkK-Pd-6DG">
             <objects>
-                <viewController storyboardIdentifier="Date Dets View Controller" id="Jcg-Ac-cuM" customClass="DateDetsViewController" customModule="JNTSeniorProjectXCode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Date Dets View Controller" id="Jcg-Ac-cuM" customClass="DateDetsViewController" customModule="JNTSeniorProjectXCode" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Eok-mX-6zp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Jj4-yQ-ARD">
+                                <rect key="frame" x="0.0" y="30" width="375" height="607"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kuo-Cu-lzD">
+                                        <rect key="frame" x="338" y="0.0" width="37" height="31"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="backToCalendar:" destination="Jcg-Ac-cuM" eventType="touchUpInside" id="oez-L1-48K"/>
+                                        </connections>
+                                    </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="15w-kB-lUV">
+                                        <rect key="frame" x="0.0" y="31" width="375" height="576"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="uMw-Fh-WPB" customClass="DateDetsTableViewCell" customModule="JNTSeniorProjectXCode">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uMw-Fh-WPB" id="Zc4-0A-X0H">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhV-PR-tpk">
+                                                            <rect key="frame" x="15" y="11" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="dhV-PR-tpk" firstAttribute="leading" secondItem="Zc4-0A-X0H" secondAttribute="leadingMargin" constant="-1" id="7Rd-e7-aoc"/>
+                                                        <constraint firstItem="dhV-PR-tpk" firstAttribute="centerY" secondItem="Zc4-0A-X0H" secondAttribute="centerY" id="HG5-dO-ZZV"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="taskTitleLabel" destination="dhV-PR-tpk" id="z5U-cN-N7v"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="15w-kB-lUV" secondAttribute="trailing" id="G2Z-y1-5MA"/>
+                                    <constraint firstItem="15w-kB-lUV" firstAttribute="top" secondItem="Kuo-Cu-lzD" secondAttribute="bottom" id="bUC-mZ-Y6R"/>
+                                    <constraint firstItem="15w-kB-lUV" firstAttribute="leading" secondItem="Jj4-yQ-ARD" secondAttribute="leading" id="bbb-ej-C3n"/>
+                                    <constraint firstAttribute="bottom" secondItem="15w-kB-lUV" secondAttribute="bottom" id="lFc-Q8-yjV"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jj4-yQ-ARD" firstAttribute="leading" secondItem="Eok-mX-6zp" secondAttribute="leading" id="9kL-NV-MSP"/>
+                            <constraint firstAttribute="trailing" secondItem="Jj4-yQ-ARD" secondAttribute="trailing" id="U7M-Ra-csE"/>
+                            <constraint firstItem="Jj4-yQ-ARD" firstAttribute="centerY" secondItem="Eok-mX-6zp" secondAttribute="centerY" id="bhr-f0-O3d"/>
+                            <constraint firstItem="Jj4-yQ-ARD" firstAttribute="top" secondItem="sdy-Ff-wte" secondAttribute="top" constant="10" id="kzh-d9-bgs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sdy-Ff-wte"/>
                     </view>
+                    <connections>
+                        <outlet property="DoneButton" destination="Kuo-Cu-lzD" id="Zse-tf-3QJ"/>
+                        <outlet property="tableView" destination="15w-kB-lUV" id="D2t-az-zHE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j6n-s8-fIM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-797" y="805"/>
+            <point key="canvasLocation" x="-797.60000000000002" y="804.64767616191909"/>
         </scene>
         <!--Ib Calendar Data Source-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="JNTSeniorProjectXCode" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Calendar View" id="8rJ-Kc-sve" customClass="SecondViewController" customModule="JNTSeniorProjectXCode" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
