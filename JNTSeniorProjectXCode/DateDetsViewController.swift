@@ -17,12 +17,22 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         
         taskArray = TaskObjectDic.taskDic[dateKey.key]!
         
         tableView.delegate = self
         tableView.dataSource = self
         }
+    
+    @objc func update()
+    {
+        if (updatedItem.updated)
+        {
+            self.tableView.reloadData()
+            updatedItem.updated = false
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(taskArray.count)
@@ -71,6 +81,8 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             
             self.present(navigation, animated: true, completion: nil)
             self.taskArray =  TaskObjectDic.taskDic[dateKey.key]!
+            
+            tableView.reloadData()
             
         }
         modify.backgroundColor = .lightGray

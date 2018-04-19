@@ -27,6 +27,7 @@ class TaskUpdateViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -68,13 +69,18 @@ class TaskUpdateViewController: UIViewController {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription = updatedDescription
         }
         print("🙉",updatedDescription,"🙉")
+        
+        updatedItem.updated = true
 
         
         let uDefault = UserDefaults.standard
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
         
         uDefault.set(encodedData, forKey: "eventDic")
-        
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+struct updatedItem{
+    static var updated = false
 }
