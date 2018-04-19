@@ -21,9 +21,10 @@ class TaskUpdateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateTitleField.placeholder = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
+        //Struct.dictionary[key] gives you the array, we then access the index at [struct.index], then retrieve the task title/description
+        updateTitleField.placeholder = ("Title: \(TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle!)")
         
-        updateDescriptionField.placeholder = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
+        updateDescriptionField.placeholder = ("Description: \(TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription!)")
 
         // Do any additional setup after loading the view.
     }
@@ -63,12 +64,10 @@ class TaskUpdateViewController: UIViewController {
         if updatedTitle != nil {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle = updatedTitle
         }
-        print("🐸",updatedTitle,"🐸")
 
         if updatedDescription != nil {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription = updatedDescription
         }
-        print("🙉",updatedDescription,"🙉")
         
         updatedItem.updated = true
 

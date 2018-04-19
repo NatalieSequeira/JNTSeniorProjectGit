@@ -88,7 +88,7 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         modify.backgroundColor = .lightGray
         
         
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+        let delete = UITableViewRowAction(style: .destructive, title: "Complete") { action, index in
             
             
             addedEvent.added = true
@@ -106,7 +106,7 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             uDefault.set(encodedData, forKey: "eventDic")
             
         }
-        // more.backgroundColor = .lightGray
+        delete.backgroundColor = .green
         
         
         return [delete, modify]
