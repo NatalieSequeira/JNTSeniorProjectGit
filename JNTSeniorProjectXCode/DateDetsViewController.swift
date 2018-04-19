@@ -18,8 +18,6 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.register(DateDetsTableViewCell.self, forCellReuseIdentifier: "cell")
-        
         taskArray = TaskObjectDic.taskDic[dateKey.key]!
         
         tableView.delegate = self
@@ -53,6 +51,45 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         self.dismiss(animated: true, completion: nil)
     }
     
+    // Deleting a task from the list. Thanks for a start point, ioscreator.com
+    // www.ioscreator.com/tutorials/delete-rows-table-view-ios8-swift
+    // Thanks as well to jose920405 for showing editable buttons for the tableview cells!
+    // stackoverflow.com/questions/32004557/swipe-able-table-view-cell-in-ios-9
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let modify = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+            //print("Modify button tapped")
+            
+            modifiedIndex.index = indexPath.row
+        }
+        modify.backgroundColor = .lightGray
+        
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+            
+            
+            addedEvent.added = true
+            /*Remove the event from the array, then override the value in the
+             dictionary for the key, which is the day we're in */
+            self.taskArray.remove(at: indexPath.row)
+            TaskObjectDic.taskDic.updateValue(self.taskArray, forKey: dateKey.key)
+            
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            
+            //Encode and store the new dictionary, which has the new array.
+            let uDefault = UserDefaults.standard
+            let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
+            
+            uDefault.set(encodedData, forKey: "eventDic")
+            
+        }
+        // more.backgroundColor = .lightGray
+        
+        
+        return [delete, modify]
+    }
+    
+    
 
     /*
     // MARK: - Navigation
@@ -64,4 +101,9 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     */
 
+}
+
+struct modifiedIndex
+{
+    static var index:Int!
 }

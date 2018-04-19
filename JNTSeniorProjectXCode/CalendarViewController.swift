@@ -94,7 +94,7 @@ class SecondViewController: UIViewController {
         formatter.dateFormat = "yyyy MM dd"
         let eventDate = cellState.date
         
-        if TaskObjectDic.taskDic[formatter.string(from: eventDate)] != nil
+        if (TaskObjectDic.taskDic[formatter.string(from: eventDate)] != nil && TaskObjectDic.taskDic[formatter.string(from: eventDate)]?.count != 0)
         {
             cell.eventDotView.isHidden = false
         }else{
@@ -174,7 +174,7 @@ extension SecondViewController: JTAppleCalendarViewDelegate {
         print(formatter.string(from: date))
         dateKey.key = formatter.string(from: date)
         
-        if TaskObjectDic.taskDic[formatter.string(from: date)] != nil
+        if (TaskObjectDic.taskDic[formatter.string(from: date)] != nil && TaskObjectDic.taskDic[formatter.string(from: date)]?.count != 0)
         {
             let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Date Dets View Controller") as UIViewController?
             let navigation = UINavigationController(rootViewController: popoverContent!)

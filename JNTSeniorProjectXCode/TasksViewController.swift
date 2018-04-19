@@ -96,14 +96,6 @@ class TasksViewController: UIViewController{
         TaskObjectDic.taskDic = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [String : Array<TaskObject>]
         }
         
-        for(ukey,utask) in TaskObjectDic.taskDic
-        {
-            print("Key: \(ukey) Title: \(utask[0].taskTitle)")
-        }
-        
-        
-    
-    
     }
     
     override func didReceiveMemoryWarning() {
