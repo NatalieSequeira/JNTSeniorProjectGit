@@ -106,6 +106,74 @@
             </objects>
             <point key="canvasLocation" x="-2.3999999999999999" y="1665.5172413793105"/>
         </scene>
+        <!--Task Update View Controller-->
+        <scene sceneID="cOm-BK-lGS">
+            <objects>
+                <viewController storyboardIdentifier="Task Update View Controller" id="fhe-dx-bka" customClass="TaskUpdateViewController" customModule="JNTSeniorProjectXCode" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rIi-vl-s6X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yav-JQ-gea">
+                                <rect key="frame" x="312" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelPopover:" destination="fhe-dx-bka" eventType="touchUpInside" id="asl-h3-TKs"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="taU-8R-YtB">
+                                <rect key="frame" x="85" y="186" width="204" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="updateTitleFieldChanged:" destination="fhe-dx-bka" eventType="editingDidEnd" id="3HI-wl-JfF"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eaw-bv-MWq">
+                                <rect key="frame" x="85" y="258" width="204" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="updateDescriptionFieldChanged:" destination="fhe-dx-bka" eventType="editingDidEnd" id="CL4-Nq-nb7"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gT-MP-8z5">
+                                <rect key="frame" x="155" y="332" width="65" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Update"/>
+                                <connections>
+                                    <action selector="updateComplete:" destination="fhe-dx-bka" eventType="touchUpInside" id="aNW-0d-zo1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="taU-8R-YtB" firstAttribute="leading" secondItem="e2c-3i-8Z5" secondAttribute="leading" constant="85" id="9Nu-Wq-Z3t"/>
+                            <constraint firstItem="eaw-bv-MWq" firstAttribute="top" secondItem="taU-8R-YtB" secondAttribute="bottom" constant="42" id="9be-qh-gD7"/>
+                            <constraint firstItem="taU-8R-YtB" firstAttribute="top" secondItem="e2c-3i-8Z5" secondAttribute="top" constant="166" id="Amh-gB-PoR"/>
+                            <constraint firstItem="taU-8R-YtB" firstAttribute="leading" secondItem="eaw-bv-MWq" secondAttribute="leading" id="VMp-xJ-J2f"/>
+                            <constraint firstItem="Yav-JQ-gea" firstAttribute="leading" secondItem="e2c-3i-8Z5" secondAttribute="leading" constant="312" id="c5e-I1-Fpg"/>
+                            <constraint firstItem="8gT-MP-8z5" firstAttribute="top" secondItem="eaw-bv-MWq" secondAttribute="bottom" constant="44" id="llu-Xh-DaQ"/>
+                            <constraint firstItem="Yav-JQ-gea" firstAttribute="top" secondItem="e2c-3i-8Z5" secondAttribute="top" id="qgs-qD-eUu"/>
+                            <constraint firstItem="taU-8R-YtB" firstAttribute="trailing" secondItem="eaw-bv-MWq" secondAttribute="trailing" id="rx5-oa-Jlt"/>
+                            <constraint firstItem="taU-8R-YtB" firstAttribute="centerX" secondItem="rIi-vl-s6X" secondAttribute="centerX" id="uhT-th-477"/>
+                            <constraint firstItem="eaw-bv-MWq" firstAttribute="centerX" secondItem="8gT-MP-8z5" secondAttribute="centerX" id="xFk-uA-nF5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e2c-3i-8Z5"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="Yav-JQ-gea" id="3F3-KX-2UP"/>
+                        <outlet property="updateButton" destination="8gT-MP-8z5" id="Tnk-yB-fAs"/>
+                        <outlet property="updateDescriptionField" destination="eaw-bv-MWq" id="2pQ-wZ-gHj"/>
+                        <outlet property="updateTitleField" destination="taU-8R-YtB" id="l6M-ta-BGh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Vc-wT-pZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1447.2" y="804.64767616191909"/>
+        </scene>
         <!--Date Dets View Controller-->
         <scene sceneID="hkK-Pd-6DG">
             <objects>

@@ -61,6 +61,15 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             //print("Modify button tapped")
             
             modifiedIndex.index = indexPath.row
+            
+            let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Task Update View Controller") as UIViewController?
+            let navigation = UINavigationController(rootViewController: popoverContent!)
+            navigation.modalPresentationStyle = UIModalPresentationStyle.popover
+            let popover = navigation.popoverPresentationController
+            popover?.delegate = self as? UIPopoverPresentationControllerDelegate
+            popover?.sourceView = self.view
+            
+            self.present(navigation, animated: true, completion: nil)
         }
         modify.backgroundColor = .lightGray
         
