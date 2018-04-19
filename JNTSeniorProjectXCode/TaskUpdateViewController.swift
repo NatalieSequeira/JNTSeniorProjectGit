@@ -21,9 +21,9 @@ class TaskUpdateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateTitleField.text = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
+        updateTitleField.placeholder = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
         
-        updateDescriptionField.text = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
+        updateDescriptionField.placeholder = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
 
         // Do any additional setup after loading the view.
     }
@@ -40,19 +40,35 @@ class TaskUpdateViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
     @IBAction func updateTitleFieldChanged(_ sender: Any) {
-        updatedTitle = updateTitleField.text
+        if (updateTitleField.text != nil){
+            updatedTitle = updateTitleField.text!
+        }else{
+            updatedTitle = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
+        }
     }
     
     @IBAction func updateDescriptionFieldChanged(_ sender: Any) {
-        updatedDescription = updateDescriptionField.text
+        if (updateDescriptionField.text != nil){
+            updatedDescription = updateDescriptionField.text!
+        }else{
+            updatedDescription = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
+        }
     }
     
-    
     @IBAction func updateComplete(_ sender: Any) {
-        TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle = updatedTitle
         
-        TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription = updatedDescription
+        if updatedTitle != nil {
+            TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle = updatedTitle
+        }
+        print("🐸",updatedTitle,"🐸")
+
+        if updatedDescription != nil {
+            TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription = updatedDescription
+        }
+        print("🙉",updatedDescription,"🙉")
+
         
         let uDefault = UserDefaults.standard
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)

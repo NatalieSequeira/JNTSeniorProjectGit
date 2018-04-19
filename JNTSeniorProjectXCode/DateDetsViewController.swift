@@ -70,6 +70,8 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             popover?.sourceView = self.view
             
             self.present(navigation, animated: true, completion: nil)
+            self.taskArray =  TaskObjectDic.taskDic[dateKey.key]!
+            
         }
         modify.backgroundColor = .lightGray
         
