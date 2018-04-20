@@ -11,6 +11,7 @@ import EventKit
 import os.log
 import CoreData
 import JTAppleCalendar
+import UserNotifications
 
 class AddEventViewController: UIViewController {
         
@@ -62,7 +63,9 @@ class AddEventViewController: UIViewController {
     var userPriority: Int? = 3
     
     
-    
+    //Notification manager
+    let notificationCenter = UNUserNotificationCenter.current()
+    let options: UNAuthorizationOptions = [.badge, .alert, .sound];
     
     
     
@@ -208,7 +211,54 @@ class AddEventViewController: UIViewController {
             
             uDefault.set(encodedData, forKey: "eventDic")
             addedEvent.added = true
+            
+            
+            reminders()
+            
+            
+            
+    
         }
+        
+        
+    }
+    
+    
+    
+    
+    func reminders(){
+        
+        notificationCenter.requestAuthorization(options: options) {
+            (granted, error) in
+            if !granted {
+                print("Something went wrong")
+            }
+        }
+        
+        notificationCenter.getNotificationSettings { (settings) in
+            if settings.authorizationStatus != .authorized {
+                // Notifications not allowed
+            }
+        }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60,
+                                                        repeats: false)
+        
+        
+        let content = UNMutableNotificationContent()
+        content.title = userTitle!
+        content.body = userDescription!
+        content.sound = UNNotificationSound.default()
+        
+        
+        let identifier = "UYLLocalNotification"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        notificationCenter.add(request, withCompletionHandler: { (error) in
+            if let error = error {
+                // Something went wrong
+            }
+        })
         
         
     }
