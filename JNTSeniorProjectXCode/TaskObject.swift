@@ -11,13 +11,14 @@ class TaskObject: NSObject, NSCoding
     var taskDate:Date!
     var taskTitle:String!
     var taskDescription:String!
-    //var taskPriority:Int!
+    var taskPriority:Int!
     
-    init(taskDate: Date, taskTitle: String, taskDescription: String)
+    init(taskDate: Date, taskTitle: String, taskDescription: String, taskPriority: Int)
     {
         self.taskDate = taskDate
         self.taskTitle = taskTitle
         self.taskDescription = taskDescription
+        self.taskPriority = taskPriority
     
     }
     
@@ -25,6 +26,7 @@ class TaskObject: NSObject, NSCoding
         aCoder.encode(taskDate, forKey: "dateK")
         aCoder.encode(taskTitle, forKey: "titleK")
         aCoder.encode(taskDescription, forKey: "descK")
+        aCoder.encode(taskPriority, forKey: "priorK")
     }
     
     
@@ -32,7 +34,8 @@ class TaskObject: NSObject, NSCoding
         let taskDate = aDecoder.decodeObject(forKey: "dateK") as! Date
         let taskTitle = aDecoder.decodeObject(forKey: "titleK") as! String
         let taskDescription = aDecoder.decodeObject(forKey: "descK") as! String
-        self.init(taskDate: taskDate, taskTitle: taskTitle, taskDescription: taskDescription)
+        let taskPriority = aDecoder.decodeObject(forKey: "priorK") as! Int
+        self.init(taskDate: taskDate, taskTitle: taskTitle, taskDescription: taskDescription, taskPriority: taskPriority)
     }
     
 

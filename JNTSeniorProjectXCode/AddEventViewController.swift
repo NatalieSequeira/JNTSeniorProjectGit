@@ -48,11 +48,18 @@ class AddEventViewController: UIViewController {
     @IBOutlet weak var selectDateButton: UIButton!
     
     
+    @IBOutlet weak var PriorityChooser: UISegmentedControl!
+    
+    
+    
+    
     // Other needed variables
     
     var userTitle: String? = ""
     
     var userDescription: String?
+    
+    var userPriority: Int? = 3
     
     
     
@@ -120,6 +127,29 @@ class AddEventViewController: UIViewController {
     //end of func
     
     
+    //Choose the Priority
+    
+    @IBAction func PickPriority(_ sender: Any) {
+        
+        if PriorityChooser.selectedSegmentIndex == 2
+        {
+            userPriority = 1
+        }
+        else if PriorityChooser.selectedSegmentIndex == 1
+        {
+            userPriority = 2
+        }
+        else if PriorityChooser.selectedSegmentIndex == 0
+        {
+            userPriority = 3
+        }
+        else
+        {
+            userPriority = 3
+        }
+        print( "\(userPriority) 🤩")
+    }
+    
     
     
     
@@ -147,15 +177,21 @@ class AddEventViewController: UIViewController {
             self.present(missingTitleAlert, animated: true, completion: nil)
         }
         else{
+            
+            if (userDescription == nil || userDescription == ""){
+                userDescription = " "
+            }
+            
             addEvent(title: userTitle!, startDate: myDatePicker.date, endDate: myDatePicker.date, description: userDescription!)
             
             self.dismiss(animated: true, completion: nil)            
             
             //Create an event object, that will take in the users info for said event
-            let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!)
+            let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!, taskPriority: userPriority!)
             EventTaskObject.taskDate = myDatePicker.date
             EventTaskObject.taskTitle = userTitle
             EventTaskObject.taskDescription = userDescription
+            EventTaskObject.taskPriority = userPriority
             
             //If there is already an event for that day's key, add said event into event array. If no event lists on that day, create the array
             if var keyDate = TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)]

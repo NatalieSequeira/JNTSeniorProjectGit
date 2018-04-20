@@ -46,10 +46,36 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let text = taskArray[indexPath.row].taskTitle
         
+        if taskArray[indexPath.row].taskPriority == 2
+        {
+            cell.backgroundColor = .yellow
+        }
+        else if taskArray[indexPath.row].taskPriority == 1
+        {
+            cell.backgroundColor = .red
+        }
+        
         cell.taskTitleLabel.text = text
         
         return cell
     }
+    
+    
+    //Select Cell to read description
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if taskArray[indexPath.row].taskDescription != " "{
+            let descriptionAlert = UIAlertController(title: "Description", message: taskArray[indexPath.row].taskDescription, preferredStyle: .alert)
+            descriptionAlert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: "Default action"), style: .`default`, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+            }))
+            self.present(descriptionAlert, animated: true, completion: nil)
+        }
+        
+    }
+        
+        
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
