@@ -150,7 +150,6 @@ class AddEventViewController: UIViewController {
         {
             userPriority = 3
         }
-        print( "\(userPriority) 🤩")
     }
     
     
@@ -241,7 +240,7 @@ class AddEventViewController: UIViewController {
             }
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60,
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30,
                                                         repeats: false)
         
         
