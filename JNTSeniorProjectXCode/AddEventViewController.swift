@@ -157,17 +157,11 @@ class AddEventViewController: UIViewController {
             updatedTask.updatedt = true
             
             reminders()
-            
-            
-            
-    
+        
         }
         
         
     }
-    
-    
-    
     
     func reminders(){
         

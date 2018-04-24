@@ -16,8 +16,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshUI()
-        
          var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         
        //When the app launchs, we will check for a dictionary, if there is one, we will fetch it
@@ -48,23 +46,19 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if (updatedTask.updatedt)
         {
-            refreshUI()
+            keyArray = Array(TaskObjectDic.taskDic.keys)
+            for key in keyArray
+            {
+                if TaskObjectDic.taskDic[key]?.count == 0
+                {
+                    let index = keyArray.index(of: key)
+                    keyArray.remove(at: index!)
+                }
+            }
+            
+            self.tableView.reloadData()
             updatedTask.updatedt = false
         }
-    }
-    
-    func refreshUI() {
-        DispatchQueue.main.async{
-            self.tableView.beginUpdates()
-            self.tableView.reloadData()
-            self.tableView.endUpdates()
-        }
-    
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,7 +66,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print(keyArray)
         return keyArray[section]
     }
     

@@ -495,9 +495,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brv-YH-Wee">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brv-YH-Wee">
                                 <rect key="frame" x="329" y="20" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="2WG-Zq-Y4h"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="35"/>
                                 <state key="normal" title="+">
                                     <color key="titleColor" red="0.50474315881729126" green="0.55728936195373535" blue="0.98043960332870483" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -508,16 +510,14 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4K-u8-xgd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4K-u8-xgd">
                                 <rect key="frame" x="151" y="20" width="72" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="32"/>
                                 <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lrc-xi-qQh">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lrc-xi-qQh">
                                 <rect key="frame" x="0.0" y="87" width="375" height="531"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="rR8-aP-DK7" customClass="TaskTableViewCell" customModule="JNTSeniorProjectXCode" customModuleProvider="target">
@@ -547,9 +547,19 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lrc-xi-qQh" firstAttribute="bottom" secondItem="evG-ef-GVR" secondAttribute="bottom" id="6sQ-Os-bps"/>
+                            <constraint firstItem="Brv-YH-Wee" firstAttribute="trailing" secondItem="JAs-D7-3ug" secondAttribute="trailingMargin" id="Fq8-BB-luS"/>
+                            <constraint firstItem="r4K-u8-xgd" firstAttribute="centerX" secondItem="lrc-xi-qQh" secondAttribute="centerX" id="G1X-v1-9yp"/>
+                            <constraint firstItem="lrc-xi-qQh" firstAttribute="top" secondItem="r4K-u8-xgd" secondAttribute="bottom" constant="28" id="ZOq-dc-iQz"/>
+                            <constraint firstItem="r4K-u8-xgd" firstAttribute="top" secondItem="Brv-YH-Wee" secondAttribute="top" id="bLp-Q2-auB"/>
+                            <constraint firstItem="r4K-u8-xgd" firstAttribute="centerX" secondItem="JAs-D7-3ug" secondAttribute="centerX" id="i1T-Kv-eB4"/>
+                            <constraint firstItem="lrc-xi-qQh" firstAttribute="leading" secondItem="JAs-D7-3ug" secondAttribute="leading" id="peJ-nR-S9z"/>
+                            <constraint firstItem="r4K-u8-xgd" firstAttribute="top" secondItem="evG-ef-GVR" secondAttribute="top" id="vWU-0f-hcH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="evG-ef-GVR"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tasks" id="x2O-yx-IyZ"/>
+                    <tabBarItem key="tabBarItem" title="Tasks" image="first" id="x2O-yx-IyZ"/>
                     <connections>
                         <outlet property="tableView" destination="lrc-xi-qQh" id="Prv-Tf-ekz"/>
                     </connections>
