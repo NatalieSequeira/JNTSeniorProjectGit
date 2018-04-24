@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import EventKit
 import os.log
-import CoreData
 import JTAppleCalendar
 import UserNotifications
 
@@ -17,7 +15,6 @@ class AddEventViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Current ID: " + CalendarIDStruct.calendarID)
         // Do any additional setup after loading the view, typically from a nib.
         myDatePicker.isHidden = true
     }
@@ -84,52 +81,6 @@ class AddEventViewController: UIViewController {
         userDescription = descriptionTextField.text!
     }
     
-    
-    
-    
-    
-    
-    
-    
-    //start of func AddEvent
-    func addEvent(title: String!, startDate: Date, endDate: Date, description: String!) {
-        
-        
-        
-        
-        let eventStore = EKEventStore()
-        
-        eventStore.requestAccess(to: EKEntityType.event) {
-            (accessYes, accessNo) in
-            
-            if (accessYes) && (accessNo == nil){
-                
-                let actualEvent: EKEvent = EKEvent(eventStore: eventStore)
-                
-                actualEvent.title = title!
-                actualEvent.startDate = startDate
-                actualEvent.endDate = endDate
-                actualEvent.notes = description!
-                actualEvent.calendar = eventStore.calendar(withIdentifier: CalendarIDStruct.calendarID)
-                print(CalendarIDStruct.calendarID)
-
-                do{
-                    try eventStore.save(actualEvent, span: .thisEvent)
-                }
-                catch{
-                    print("Error has occurred")
-                    
-                }
-                print("Success")
-            }
-            else{
-                print("Did not have permission to use Calendar")
-            }
-        }
-    }
-    //end of func
-    
-    
     //Choose the Priority
     
     @IBAction func PickPriority(_ sender: Any) {
@@ -151,11 +102,6 @@ class AddEventViewController: UIViewController {
             userPriority = 3
         }
     }
-    
-    
-    
-    
-    
     
     // Add the Event to the Calendar
     @IBAction func buttonPressed(_ sender: Any) {
@@ -184,8 +130,6 @@ class AddEventViewController: UIViewController {
                 userDescription = " "
             }
             
-            addEvent(title: userTitle!, startDate: myDatePicker.date, endDate: myDatePicker.date, description: userDescription!)
-            
             self.dismiss(animated: true, completion: nil)            
             
             //Create an event object, that will take in the users info for said event
@@ -210,7 +154,7 @@ class AddEventViewController: UIViewController {
             
             uDefault.set(encodedData, forKey: "eventDic")
             addedEvent.added = true
-            
+            updatedTask.updatedt = true
             
             reminders()
             
