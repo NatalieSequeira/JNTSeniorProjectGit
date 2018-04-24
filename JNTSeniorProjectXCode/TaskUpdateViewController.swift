@@ -70,6 +70,8 @@ class TaskUpdateViewController: UIViewController {
         }
         
         updatedItem.updated = true
+        updatedTask.updatedt = true
+
 
         
         let uDefault = UserDefaults.standard

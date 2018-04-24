@@ -118,6 +118,8 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             
             
             addedEvent.added = true
+            updatedTask.updatedt = true
+
             /*Remove the event from the array, then override the value in the
              dictionary for the key, which is the day we're in */
             self.taskArray.remove(at: indexPath.row)

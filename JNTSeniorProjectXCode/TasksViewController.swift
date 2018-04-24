@@ -114,10 +114,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         taskArray = TaskObjectDic.taskDic[keyArray[indexPath.section]]!
         
-        let modify = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+        let modify = UITableViewRowAction(style: .normal, title: "Edit") { action, xindex in
             //print("Modify button tapped")
             
             modifiedIndex.index = indexPath.row
+            dateKey.key = self.keyArray[indexPath.section]
             
             let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Task Update View Controller") as UIViewController?
             let navigation = UINavigationController(rootViewController: popoverContent!)
@@ -139,6 +140,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             
             updatedTask.updatedt = true
+            addedEvent.added = true
+
             /*Remove the event from the array, then override the value in the
              dictionary for the key, which is the day we're in */
             self.taskArray.remove(at: indexPath.row)
