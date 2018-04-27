@@ -201,9 +201,13 @@ class AddEventViewController: UIViewController {
         var triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: Date())
         triggerDate.hour = 9
         triggerDate.minute = 30
+        triggerDate.second = 00
         var eventDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: myDatePicker.date)
         eventDate.hour = 9
         eventDate.minute = 30
+        eventDate.second = 00
+        
+        var fixedArray:Array<Int> = []
 
         
         if myDatePicker.date.timeIntervalSinceNow > 345600.00 {
@@ -214,6 +218,12 @@ class AddEventViewController: UIViewController {
                 for i in 1...days
                 {
                     triggerDate.day! += 2
+                    
+                    //running a function to check if the days surpassed the month, then updating the month
+                    fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
+                    triggerDate.day = fixedArray[1]
+                    triggerDate.month = fixedArray[0]
+                    
                     if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                     {
                         trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
@@ -235,16 +245,21 @@ class AddEventViewController: UIViewController {
                 for i in 1...days
                 {
                     triggerDate.day! += 3
+
+                    fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
+                    triggerDate.day = fixedArray[1]
+                    triggerDate.month = fixedArray[0]
+                    
                     if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                     {
                         trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
                     }else{
                         trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
                     }
-                    let highPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
-                    let highPrReq = UNNotificationRequest(identifier: highPriId, content: content, trigger: trigger)
-                    notificationCenter.add(highPrReq, withCompletionHandler: {(error) in
-                        if let highPriError = error {
+                    let medPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
+                    let medPrReq = UNNotificationRequest(identifier: medPriId, content: content, trigger: trigger)
+                    notificationCenter.add(medPrReq, withCompletionHandler: {(error) in
+                        if let medPriError = error {
                             //something went wrong
                         }
                     })
@@ -256,34 +271,130 @@ class AddEventViewController: UIViewController {
                 for i in 1...days
                 {
                     triggerDate.day! += 4
+
+                    fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
+                    triggerDate.day = fixedArray[1]
+                    triggerDate.month = fixedArray[0]
+                    
                     if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                     {
                         trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
                     }else{
                         trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
                     }
-                    let highPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
-                    let highPrReq = UNNotificationRequest(identifier: highPriId, content: content, trigger: trigger)
-                    notificationCenter.add(highPrReq, withCompletionHandler: {(error) in
-                        if let highPriError = error {
+                    let lowPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
+                    let lowPrReq = UNNotificationRequest(identifier: lowPriId, content: content, trigger: trigger)
+                    notificationCenter.add(lowPrReq, withCompletionHandler: {(error) in
+                        if let lowPriError = error {
                             //something went wrong
                         }
                     })
                 }
             }
         }
-        
-        
-       /* let identifier = "UYLLocalNotification"
-        let request = UNNotificationRequest(identifier: identifier,
-                                            content: content, trigger: trigger)
-        notificationCenter.add(request, withCompletionHandler: { (error) in
-            if let error = error {
-                // Something went wrong
+    }
+    
+    func dateFixer(day: Int,month: Int) -> Array<Int>
+    {
+        var nDay = day
+        var nMonth = month
+        if month == 12
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 1
             }
-        })*/
+        }else if month == 11
+        {
+            if day > 30
+            {
+                nDay = day - 30
+                nMonth = 12
+            }
+            
+        }else if month == 10
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 11
+            }
+            
+        }else if month == 9
+        {
+            if day > 30
+            {
+                nDay = day - 30
+                nMonth = 10
+            }
+            
+        }else if month == 8
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 9
+            }
+            
+        }else if month == 7
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 8
+            }
+            
+        }else if month == 6
+        {
+            if day > 30
+            {
+                nDay = day - 30
+                nMonth = 7
+            }
+            
+        }else if month == 5
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 6
+            }
+            
+        }else if month == 4
+        {
+            if day > 30
+            {
+                nDay = day - 30
+                nMonth = 5
+            }
+            
+        }else if month == 3
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 4
+            }
+            
+        }else if month == 2
+        {
+            if day > 28
+            {
+                nDay = day - 28
+                nMonth = 3
+            }
+            
+        }else if month == 1
+        {
+            if day > 31
+            {
+                nDay = day - 31
+                nMonth = 2
+            }
+        }
         
-        
+        return [nMonth,nDay]
     }
     
     
