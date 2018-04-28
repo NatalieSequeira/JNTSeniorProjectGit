@@ -133,11 +133,12 @@ class AddEventViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)            
             
             //Create an event object, that will take in the users info for said event
-            let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!, taskPriority: userPriority!)
+            let EventTaskObject = TaskObject(taskDate: myDatePicker.date, taskTitle: userTitle!, taskDescription: userDescription!, taskPriority: userPriority!, taskMadeDate: Date())
             EventTaskObject.taskDate = myDatePicker.date
             EventTaskObject.taskTitle = userTitle
             EventTaskObject.taskDescription = userDescription
             EventTaskObject.taskPriority = userPriority
+            EventTaskObject.taskMadeDate = Date()
             
             //If there is already an event for that day's key, add said event into event array. If no event lists on that day, create the array
             if var keyDate = TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)]
@@ -170,7 +171,7 @@ class AddEventViewController: UIViewController {
         
         myDateFormatter.locale = myLocale
         
-        myDateFormatter.dateFormat = "yyyy MM dd"
+        myDateFormatter.dateFormat = "yyyy MM dd HH mm ss SSSS"
         
         notificationCenter.requestAuthorization(options: options) {
             (granted, error) in
@@ -186,10 +187,6 @@ class AddEventViewController: UIViewController {
         }
         
         var trigger:UNNotificationTrigger
-       /* var dateComponents = DateComponents()
-        dateComponents.hour = 10
-        dateComponents.minute = 30
-        trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)*/
         
         let content = UNMutableNotificationContent()
         content.title = userTitle!
@@ -210,7 +207,7 @@ class AddEventViewController: UIViewController {
         var fixedArray:Array<Int> = []
 
         
-        if myDatePicker.date.timeIntervalSinceNow > 345600.00 {
+        if myDatePicker.date.timeIntervalSinceNow > 604800.00 {
             if userPriority == 1
             {
                 let days = Int(daysDouble/2)
@@ -291,6 +288,31 @@ class AddEventViewController: UIViewController {
                     })
                 }
             }
+        }else{
+            let days = Int(daysDouble)
+            for i in 1...days
+            {
+                triggerDate.day! += 1
+                
+                fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
+                triggerDate.day = fixedArray[1]
+                triggerDate.month = fixedArray[0]
+                
+                if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
+                {
+                    trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
+                }else{
+                    trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                }
+                let lowPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
+                let lowPrReq = UNNotificationRequest(identifier: lowPriId, content: content, trigger: trigger)
+                notificationCenter.add(lowPrReq, withCompletionHandler: {(error) in
+                    if let lowPriError = error {
+                        //something went wrong
+                    }
+                })
+            }
+            
         }
     }
     
