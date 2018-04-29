@@ -40,6 +40,32 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         
+        let myDateFormatter = DateFormatter()
+        let myLocale = NSLocale.autoupdatingCurrent;
+        
+        myDateFormatter.locale = myLocale
+        
+        myDateFormatter.dateFormat = "yyyy MM dd"
+        
+        var convertArray:[Date] = []
+        
+        for dat in keyArray
+        {
+            let nDate = myDateFormatter.date(from: dat)
+            if let nDate = nDate{
+                convertArray.append(nDate)
+            }
+        }
+        
+        keyArray.removeAll()
+        convertArray = convertArray.sorted(by: { $0.compare($1) == .orderedDescending })
+        
+        for sDat in convertArray
+        {
+            let sDate = myDateFormatter.string(from: sDat)
+            keyArray.append(sDate)
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -56,6 +82,32 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     let index = keyArray.index(of: key)
                     keyArray.remove(at: index!)
                 }
+            }
+            
+            let myDateFormatter = DateFormatter()
+            let myLocale = NSLocale.autoupdatingCurrent;
+            
+            myDateFormatter.locale = myLocale
+            
+            myDateFormatter.dateFormat = "yyyy MM dd"
+            
+            var convertArray:[Date] = []
+            
+            for dat in keyArray
+            {
+                let nDate = myDateFormatter.date(from: dat)
+                if let nDate = nDate{
+                    convertArray.append(nDate)
+                }
+            }
+            
+            keyArray.removeAll()
+            convertArray = convertArray.sorted(by: { $0.compare($1) == .orderedDescending })
+            
+            for sDat in convertArray
+            {
+                let sDate = myDateFormatter.string(from: sDat)
+                keyArray.append(sDate)
             }
             
             self.tableView.reloadData()
