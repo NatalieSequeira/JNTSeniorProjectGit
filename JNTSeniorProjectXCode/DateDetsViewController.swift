@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import UserNotifications
+
 
 class DateDetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
    
@@ -58,6 +60,33 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.taskTitleLabel.text = text
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
+        
+        if taskArray[indexPath.row].taskPriority == 2
+        {
+            cell.backgroundColor = .yellow
+        }
+        else if taskArray[indexPath.row].taskPriority == 1
+        {
+            cell.backgroundColor = .red
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
+        
+        if taskArray[indexPath.row].taskPriority == 2
+        {
+            cell.backgroundColor = .yellow
+        }
+        else if taskArray[indexPath.row].taskPriority == 1
+        {
+            cell.backgroundColor = .red
+        }
     }
     
     
@@ -119,6 +148,61 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             
             addedEvent.added = true
             updatedTask.updatedt = true
+            
+            
+            let notificationCenter = UNUserNotificationCenter.current()
+            let options: UNAuthorizationOptions = [.badge, .alert, .sound];
+            let myDateFormatter = DateFormatter()
+            let myLocale = NSLocale.autoupdatingCurrent;
+            
+            myDateFormatter.locale = myLocale
+            
+            myDateFormatter.dateFormat = "yyyy MM dd HH mm ss SSSS"
+            
+            //remove notificaitons for it
+            notificationCenter.requestAuthorization(options: options) {
+                (granted, error) in
+                if !granted {
+                    print("Something went wrong")
+                }
+            }
+            
+            notificationCenter.getNotificationSettings { (settings) in
+                if settings.authorizationStatus != .authorized {
+                    // Notifications not allowed
+                }
+            }
+            
+            let madeDate = TaskObjectDic.taskDic[dateKey.key]![indexPath.row].taskMadeDate!
+            let fireDate = TaskObjectDic.taskDic[dateKey.key]![indexPath.row].taskDate!
+            
+            
+            let deleteDatesDouble = (round(fireDate.timeIntervalSince(madeDate)/86400))
+            
+            var deleteDates = Int(deleteDatesDouble)
+            
+            if deleteDates <= 0
+            {deleteDates = 1}
+            
+            if fireDate.timeIntervalSince(madeDate) > 604800.00
+            {
+                if TaskObjectDic.taskDic[dateKey.key]![indexPath.row].taskPriority == 1
+                {
+                    deleteDates = Int(deleteDatesDouble/2)
+                }else if TaskObjectDic.taskDic[dateKey.key]![indexPath.row].taskPriority == 2
+                {
+                    deleteDates = Int(deleteDatesDouble/3)
+                }else if TaskObjectDic.taskDic[dateKey.key]![indexPath.row].taskPriority == 3
+                {
+                    deleteDates = Int(deleteDatesDouble/4)
+                }
+            }
+            
+            for i in 1...deleteDates
+            {
+                notificationCenter.removePendingNotificationRequests(withIdentifiers: ([myDateFormatter.string(from: fireDate) + "\(i)"]) )
+            }
+
 
             /*Remove the event from the array, then override the value in the
              dictionary for the key, which is the day we're in */

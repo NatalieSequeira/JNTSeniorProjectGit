@@ -64,14 +64,20 @@ class TaskUpdateViewController: UIViewController {
         
         if updatedTitle != nil {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle = updatedTitle
+        }else{
+            updatedTitle = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
         }
 
         if updatedDescription != nil {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription = updatedDescription
+        }else{
+            updatedDescription = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
+
         }
         
         updatedItem.updated = true
         updatedTask.updatedt = true
+
         
         //notifications
         let notificationCenter = UNUserNotificationCenter.current()
@@ -134,7 +140,10 @@ class TaskUpdateViewController: UIViewController {
         content.body = updatedDescription!
         content.sound = UNNotificationSound.default()
         
-        let daysDouble = (round(TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDate.timeIntervalSinceNow/86400))
+        var daysDouble = (round(TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDate.timeIntervalSinceNow/86400))
+        
+        if daysDouble <= 0
+        {daysDouble = 1}
         
         var triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: Date())
         triggerDate.hour = 9

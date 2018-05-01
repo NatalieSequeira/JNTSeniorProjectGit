@@ -17,6 +17,7 @@ class AddEventViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         myDatePicker.isHidden = true
+        myDatePicker.minimumDate = Date()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,6 +46,8 @@ class AddEventViewController: UIViewController {
     // Button that will make the date picker appear.
     @IBOutlet weak var selectDateButton: UIButton!
     
+    // Button to cancel adding an event
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var PriorityChooser: UISegmentedControl!
     
@@ -59,12 +62,17 @@ class AddEventViewController: UIViewController {
     
     var userPriority: Int? = 3
     
+
+    
     
     //Notification manager
     let notificationCenter = UNUserNotificationCenter.current()
     let options: UNAuthorizationOptions = [.badge, .alert, .sound];
     
     
+    @IBAction func cancelPopover(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func bringUpDatePicker(_ sender: Any) {
         view.endEditing(true)
@@ -193,7 +201,11 @@ class AddEventViewController: UIViewController {
         content.body = userDescription!
         content.sound = UNNotificationSound.default()
         
-        let daysDouble = (round(myDatePicker.date.timeIntervalSinceNow/86400))
+        var daysDouble = (round(myDatePicker.date.timeIntervalSinceNow/86400))
+        if daysDouble <= 0{
+            daysDouble = 1 
+        }
+        
         
         var triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: Date())
         triggerDate.hour = 9

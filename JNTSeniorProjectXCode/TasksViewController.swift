@@ -18,7 +18,9 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+        
+        //var colorTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateColor), userInfo: nil, repeats: true)
         
        //When the app launchs, we will check for a dictionary, if there is one, we will fetch it
         if (UserDefaults.standard.object(forKey: "eventDic") == nil){
@@ -69,6 +71,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    /*@objc func updateColor()
+    {
+        self.tableView.reloadData()
+    }*/
     
     @objc func update()
     {
@@ -127,6 +134,21 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return TaskObjectDic.taskDic[keyArray[section]]!.count
         }
     
+    /*func handleCellColor(tableView: UITableView){
+        let indexPath: IndexPath
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
+
+        if taskArray[indexPath.row].taskPriority == 2
+        {
+            cell.backgroundColor = .yellow
+        }
+        else if taskArray[indexPath.row].taskPriority == 1
+        {
+            cell.backgroundColor = .red
+        }
+    }*/
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
         
@@ -146,6 +168,37 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.taskTitleLabel.text = text
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
+        
+        taskArray = TaskObjectDic.taskDic[keyArray[indexPath.section]]!
+        
+        if taskArray[indexPath.row].taskPriority == 2
+        {
+            cell.backgroundColor = .yellow
+        }
+        else if taskArray[indexPath.row].taskPriority == 1
+        {
+            cell.backgroundColor = .red
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
+        
+        taskArray = TaskObjectDic.taskDic[keyArray[indexPath.section]]!
+        
+        if taskArray[indexPath.row].taskPriority == 2
+        {
+            cell.backgroundColor = .yellow
+        }
+        else if taskArray[indexPath.row].taskPriority == 1
+        {
+            cell.backgroundColor = .red
+        }
     }
     
     
@@ -227,6 +280,9 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             var deleteDates = Int(deleteDatesDouble)
             
+            if deleteDates <= 0
+            {deleteDates = 1}
+            
             if fireDate.timeIntervalSince(madeDate) > 604800.00
             {
                 if TaskObjectDic.taskDic[self.keyArray[indexPath.section]]![indexPath.row].taskPriority == 1
@@ -266,6 +322,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return [delete, modify]
     }
     
+
     
     
     

@@ -25,8 +25,8 @@
                                 <date key="date" timeIntervalSinceReferenceDate="541554811.80611503">
                                     <!--2018-02-28 23:53:31 +0000-->
                                 </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="536497200">
-                                    <!--2018-01-01 11:00:00 +0000-->
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="539175600">
+                                    <!--2018-02-01 11:00:00 +0000-->
                                 </date>
                                 <date key="maximumDate" timeIntervalSinceReferenceDate="946638000">
                                     <!--2030-12-31 11:00:00 +0000-->
@@ -106,6 +106,13 @@
                                     <action selector="PickPriority:" destination="9pv-A4-QxB" eventType="valueChanged" id="0CH-OL-1h8"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L9I-Oy-9WT">
+                                <rect key="frame" x="311" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelPopover:" destination="9pv-A4-QxB" eventType="touchUpInside" id="ELy-I9-HfA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -122,6 +129,7 @@
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="ROT-WW-ggn" secondAttribute="trailing" constant="160" id="NBk-94-fO3"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="1eb-PK-la3" secondAttribute="trailing" constant="52" id="NtP-Gz-qNe"/>
                             <constraint firstItem="ROT-WW-ggn" firstAttribute="top" secondItem="3qu-k7-en8" secondAttribute="bottom" constant="26" id="O0k-Uh-hZe"/>
+                            <constraint firstItem="L9I-Oy-9WT" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="Paj-aU-eRN"/>
                             <constraint firstItem="MZ4-Sd-n4M" firstAttribute="centerX" secondItem="AW7-0E-Xc5" secondAttribute="centerX" id="R5k-kf-etH"/>
                             <constraint firstItem="ROT-WW-ggn" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="160" id="TjI-WB-ib0"/>
                             <constraint firstItem="MZ4-Sd-n4M" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="74" id="YJ7-y5-0LJ"/>
@@ -132,6 +140,7 @@
                             <constraint firstItem="a5E-KU-VlM" firstAttribute="top" secondItem="1eb-PK-la3" secondAttribute="bottom" constant="44" id="rRU-JZ-b2t"/>
                             <constraint firstItem="AW7-0E-Xc5" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="96" id="tfJ-CQ-8Gh"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="3qu-k7-en8" secondAttribute="trailing" constant="52" id="u71-j1-NTi"/>
+                            <constraint firstItem="L9I-Oy-9WT" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="vnj-iU-WGB"/>
                             <constraint firstItem="MZ4-Sd-n4M" firstAttribute="top" secondItem="ROT-WW-ggn" secondAttribute="bottom" constant="8" symbolic="YES" id="yc0-Xp-DXc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -139,6 +148,7 @@
                     <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="PriorityChooser" destination="MZ4-Sd-n4M" id="TyW-yb-7dj"/>
+                        <outlet property="cancelButton" destination="L9I-Oy-9WT" id="rx8-bA-TSw"/>
                         <outlet property="descriptionTextField" destination="3qu-k7-en8" id="Ebp-eo-08t"/>
                         <outlet property="myDatePicker" destination="ZF1-Cl-Jq7" id="3pS-EW-BDF"/>
                         <outlet property="selectDateButton" destination="itm-nZ-Tk0" id="hA6-wB-GqQ"/>
