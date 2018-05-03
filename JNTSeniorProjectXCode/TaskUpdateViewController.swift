@@ -394,6 +394,3 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-struct updatedItem{
-    static var updated = false
-}

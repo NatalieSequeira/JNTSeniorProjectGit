@@ -245,3 +245,7 @@ struct modifiedIndex
 {
     static var index:Int!
 }
+
+struct updatedItem{
+    static var updated = false
+}
