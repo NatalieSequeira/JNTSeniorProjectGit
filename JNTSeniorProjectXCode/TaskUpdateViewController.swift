@@ -86,10 +86,7 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
 
         }
         
-        updatedItem.updated = true
-        updatedTask.updatedt = true
-
-        
+    
         //notifications
         let notificationCenter = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.badge, .alert, .sound];

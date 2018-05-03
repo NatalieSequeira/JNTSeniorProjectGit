@@ -176,7 +176,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             
             uDefault.set(encodedData, forKey: "eventDic")
             addedEvent.added = true
-            updatedTask.updatedt = true
             
             reminders()
         
@@ -192,7 +191,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         myDateFormatter.locale = myLocale
         
-        myDateFormatter.dateFormat = "yyyy MM dd HH mm ss SSSS"
+        myDateFormatter.dateFormat = "M-dd"
         
         notificationCenter.requestAuthorization(options: options) {
             (granted, error) in
@@ -210,9 +209,11 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         var trigger:UNNotificationTrigger
         
         let content = UNMutableNotificationContent()
-        content.title = userTitle!
+        content.title = ("\(userTitle!) \(myDateFormatter.string(from: myDatePicker.date))")
         content.body = userDescription!
         content.sound = UNNotificationSound.default()
+        
+        myDateFormatter.dateFormat = "yyyy MM dd HH mm ss SSSS"
         
         var daysDouble = (round(myDatePicker.date.timeIntervalSinceNow/86400))
         if daysDouble <= 0{

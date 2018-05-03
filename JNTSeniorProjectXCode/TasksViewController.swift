@@ -18,8 +18,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
-        
         //var colorTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateColor), userInfo: nil, repeats: true)
         
        //When the app launchs, we will check for a dictionary, if there is one, we will fetch it
@@ -72,54 +70,46 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
     }
     
-    /*@objc func updateColor()
-    {
-        self.tableView.reloadData()
-    }*/
-    
-    @objc func update()
-    {
-        if (updatedTask.updatedt)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        keyArray = Array(TaskObjectDic.taskDic.keys)
+        for key in keyArray
         {
-            keyArray = Array(TaskObjectDic.taskDic.keys)
-            for key in keyArray
+            if TaskObjectDic.taskDic[key]?.count == 0
             {
-                if TaskObjectDic.taskDic[key]?.count == 0
-                {
-                    let index = keyArray.index(of: key)
-                    keyArray.remove(at: index!)
-                }
+                let index = keyArray.index(of: key)
+                keyArray.remove(at: index!)
             }
-            
-            let myDateFormatter = DateFormatter()
-            let myLocale = NSLocale.autoupdatingCurrent;
-            
-            myDateFormatter.locale = myLocale
-            
-            myDateFormatter.dateFormat = "yyyy MM dd"
-            
-            var convertArray:[Date] = []
-            
-            for dat in keyArray
-            {
-                let nDate = myDateFormatter.date(from: dat)
-                if let nDate = nDate{
-                    convertArray.append(nDate)
-                }
-            }
-            
-            keyArray.removeAll()
-            convertArray = convertArray.sorted(by: { $0.compare($1) == .orderedDescending })
-            
-            for sDat in convertArray
-            {
-                let sDate = myDateFormatter.string(from: sDat)
-                keyArray.append(sDate)
-            }
-            
-            self.tableView.reloadData()
-            updatedTask.updatedt = false
         }
+        
+        let myDateFormatter = DateFormatter()
+        let myLocale = NSLocale.autoupdatingCurrent;
+        
+        myDateFormatter.locale = myLocale
+        
+        myDateFormatter.dateFormat = "yyyy MM dd"
+        
+        var convertArray:[Date] = []
+        
+        for dat in keyArray
+        {
+            let nDate = myDateFormatter.date(from: dat)
+            if let nDate = nDate{
+                convertArray.append(nDate)
+            }
+        }
+        
+        keyArray.removeAll()
+        convertArray = convertArray.sorted(by: { $0.compare($1) == .orderedDescending })
+        
+        for sDat in convertArray
+        {
+            let sDate = myDateFormatter.string(from: sDat)
+            keyArray.append(sDate)
+        }
+        
+        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -241,7 +231,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.present(navigation, animated: true, completion: nil)
             self.taskArray =  TaskObjectDic.taskDic[self.keyArray[indexPath.section]]!
-            
             tableView.reloadData()
             
         }
@@ -250,8 +239,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let delete = UITableViewRowAction(style: .destructive, title: "Complete") { action, index in
             
-            
-            updatedTask.updatedt = true
             addedEvent.added = true
             
             let notificationCenter = UNUserNotificationCenter.current()
@@ -338,8 +325,4 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 }
 
-struct updatedTask
-{
-    static var updatedt = false
-}
 

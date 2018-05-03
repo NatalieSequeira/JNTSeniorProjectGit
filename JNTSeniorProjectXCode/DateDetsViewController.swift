@@ -19,7 +19,6 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         
         taskArray = TaskObjectDic.taskDic[dateKey.key]!
         
@@ -27,13 +26,9 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         }
     
-    @objc func update()
-    {
-        if (updatedItem.updated)
-        {
-            self.tableView.reloadData()
-            updatedItem.updated = false
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,7 +145,6 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             
             
             addedEvent.added = true
-            updatedTask.updatedt = true
             
             
             let notificationCenter = UNUserNotificationCenter.current()
@@ -244,8 +238,4 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
 struct modifiedIndex
 {
     static var index:Int!
-}
-
-struct updatedItem{
-    static var updated = false
 }
