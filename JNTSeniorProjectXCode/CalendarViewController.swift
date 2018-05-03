@@ -33,6 +33,7 @@ class SecondViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         calendarView.reloadData()
+        //Test
     }
     func setUpViewsOfCalendar(from visibleDates: DateSegmentInfo)
     {
