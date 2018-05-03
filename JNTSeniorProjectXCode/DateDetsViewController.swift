@@ -143,9 +143,7 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let delete = UITableViewRowAction(style: .destructive, title: "Complete") { action, index in
             
-            
-            addedEvent.added = true
-            
+                        
             
             let notificationCenter = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.badge, .alert, .sound];

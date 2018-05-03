@@ -24,23 +24,16 @@ class SecondViewController: UIViewController {
         calendarView.reloadData()
     }
 
-    // Extra code added to the default viewDidLoad func
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarView.scrollToDate( Date() )
         setupCalendarView()
-        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
         }
     
-    @objc func update()
-    {
-        if (addedEvent.added)
-        {
-            calendarView.reloadData()
-            addedEvent.added = false
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        calendarView.reloadData()
     }
-    
     func setUpViewsOfCalendar(from visibleDates: DateSegmentInfo)
     {
         let date = visibleDates.monthDates.first!.date

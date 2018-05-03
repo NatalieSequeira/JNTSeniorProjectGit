@@ -175,7 +175,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: TaskObjectDic.taskDic)
             
             uDefault.set(encodedData, forKey: "eventDic")
-            addedEvent.added = true
             
             reminders()
         
@@ -448,9 +447,5 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-struct addedEvent
-{
-    static var added = false
-}
 
 
