@@ -48,7 +48,7 @@ class SecondViewController: UIViewController {
         self.formatter.dateFormat = "yyyy"
         self.year.text = formatter.string(from: date)
         
-        self.formatter.dateFormat = "MMMM"
+        self.formatter.dateFormat = "MMM"
         self.month.text = formatter.string(from: date)
     }
     

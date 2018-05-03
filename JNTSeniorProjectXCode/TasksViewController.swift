@@ -189,15 +189,18 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
         
-        taskArray = TaskObjectDic.taskDic[keyArray[indexPath.section]]!
+        if(indexPath.section > 0)
+        {
+            taskArray = TaskObjectDic.taskDic[keyArray[indexPath.section]]!
         
-        if taskArray[indexPath.row].taskPriority == 2
-        {
-            cell.backgroundColor = .yellow
-        }
-        else if taskArray[indexPath.row].taskPriority == 1
-        {
-            cell.backgroundColor = .red
+            if taskArray[indexPath.row].taskPriority == 2
+            {
+                cell.backgroundColor = .yellow
+            }
+            else if taskArray[indexPath.row].taskPriority == 1
+            {
+                cell.backgroundColor = .red
+            }
         }
     }
     

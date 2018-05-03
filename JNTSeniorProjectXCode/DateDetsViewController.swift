@@ -78,14 +78,16 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
-        
-        if taskArray[indexPath.row].taskPriority == 2
+        if(indexPath.row > 0)
         {
-            cell.backgroundColor = .yellow
-        }
-        else if taskArray[indexPath.row].taskPriority == 1
-        {
-            cell.backgroundColor = .red
+            if taskArray[indexPath.row].taskPriority == 2
+            {
+                cell.backgroundColor = .yellow
+            }
+            else if taskArray[indexPath.row].taskPriority == 1
+            {
+                cell.backgroundColor = .red
+            }
         }
     }
     
