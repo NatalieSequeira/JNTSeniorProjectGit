@@ -60,7 +60,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         keyArray.removeAll()
-        convertArray = convertArray.sorted(by: { $0.compare($1) == .orderedDescending })
+        convertArray = convertArray.sorted(by: { $0.compare($1) == .orderedAscending })
         
         for sDat in convertArray
         {
@@ -189,17 +189,19 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
         
-        if(indexPath.section > 0)
+        if(indexPath.section > 0 && keyArray.indices.contains(indexPath.section))
         {
             taskArray = TaskObjectDic.taskDic[keyArray[indexPath.section]]!
-        
+            
+            if (taskArray.indices.contains(indexPath.row)){
             if taskArray[indexPath.row].taskPriority == 2
-            {
-                cell.backgroundColor = .yellow
-            }
-            else if taskArray[indexPath.row].taskPriority == 1
-            {
-                cell.backgroundColor = .red
+                {
+                    cell.backgroundColor = .yellow
+                }
+                else if taskArray[indexPath.row].taskPriority == 1
+                {
+                    cell.backgroundColor = .red
+                }
             }
         }
     }

@@ -78,7 +78,8 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
-        if(indexPath.row > 0)
+        
+        if(indexPath.row > 0 && taskArray.indices.contains(indexPath.row))
         {
             if taskArray[indexPath.row].taskPriority == 2
             {

@@ -135,9 +135,11 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        for i in 1...deleteDates
-        {
-            notificationCenter.removePendingNotificationRequests(withIdentifiers: ([myDateFormatter.string(from: fireDate) + "\(i)"]) )
+        if (deleteDates > 0){
+            for i in 1...deleteDates
+            {
+                notificationCenter.removePendingNotificationRequests(withIdentifiers: ([myDateFormatter.string(from: fireDate) + "\(i)"]) )
+            }
         }
         
         
