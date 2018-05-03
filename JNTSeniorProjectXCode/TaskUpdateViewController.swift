@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class TaskUpdateViewController: UIViewController {
+class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
 
     
     @IBOutlet weak var updateTitleField: UITextField!
@@ -22,12 +22,23 @@ class TaskUpdateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateTitleField.delegate = self
+        updateDescriptionField.delegate = self
+        
         //Struct.dictionary[key] gives you the array, we then access the index at [struct.index], then retrieve the task title/description
         updateTitleField.placeholder = ("Title: \(TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle!)")
         
         updateDescriptionField.placeholder = ("Description: \(TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription!)")
 
         // Do any additional setup after loading the view.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.updateTitleField.resignFirstResponder()
+        
+        self.updateDescriptionField.resignFirstResponder()
+        
+        return true
     }
     
 

@@ -11,10 +11,13 @@ import os.log
 import JTAppleCalendar
 import UserNotifications
 
-class AddEventViewController: UIViewController {
+class AddEventViewController: UIViewController, UITextFieldDelegate {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleTextField.delegate = self
+        descriptionTextField.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
         myDatePicker.isHidden = true
         myDatePicker.minimumDate = Date()
@@ -50,6 +53,16 @@ class AddEventViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var PriorityChooser: UISegmentedControl!
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.titleTextField.resignFirstResponder()
+        
+        self.descriptionTextField.resignFirstResponder()
+        
+        return true
+    }
+    
     
     
     
