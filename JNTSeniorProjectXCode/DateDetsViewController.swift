@@ -16,6 +16,8 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var DoneButton: UIButton!
     
     var taskArray:Array<TaskObject> = []
+    let highPriCol = UIColor(red: 255, green: 73/255, blue: 73/255, alpha: 0.95)
+    let medPriCol = UIColor(red: 255, green: 243/255, blue: 117/255, alpha: 0.95)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +47,11 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if taskArray[indexPath.row].taskPriority == 2
         {
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = medPriCol
         }
         else if taskArray[indexPath.row].taskPriority == 1
         {
-            cell.backgroundColor = .red
+            cell.backgroundColor = highPriCol
         }
         
         cell.taskTitleLabel.text = text
@@ -62,11 +64,11 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if taskArray[indexPath.row].taskPriority == 2
         {
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = medPriCol
         }
         else if taskArray[indexPath.row].taskPriority == 1
         {
-            cell.backgroundColor = .red
+            cell.backgroundColor = highPriCol
         }
         
     }
@@ -78,11 +80,11 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         {
             if taskArray[indexPath.row].taskPriority == 2
             {
-                cell.backgroundColor = .yellow
+                cell.backgroundColor = medPriCol
             }
             else if taskArray[indexPath.row].taskPriority == 1
             {
-                cell.backgroundColor = .red
+                cell.backgroundColor = highPriCol
             }
         }
     }

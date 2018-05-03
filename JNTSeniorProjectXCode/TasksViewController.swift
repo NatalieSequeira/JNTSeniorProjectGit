@@ -12,13 +12,19 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var tableView: UITableView!
     
+    var updateBool = true
+
     var keyArray:Array<String> = []
     var taskArray:Array<TaskObject> = []
+    
+    let highPriCol = UIColor(red: 255, green: 73/255, blue: 73/255, alpha: 0.95)
+    let medPriCol = UIColor(red: 255, green: 243/255, blue: 117/255, alpha: 0.95)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //var colorTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateColor), userInfo: nil, repeats: true)
+        var timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+
         
        //When the app launchs, we will check for a dictionary, if there is one, we will fetch it
         if (UserDefaults.standard.object(forKey: "eventDic") == nil){
@@ -68,6 +74,14 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    @objc func update(){
+        if (self.updateBool){
+            print("hi")
+            self.tableView.reloadData()
+            self.updateBool = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,20 +138,6 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return TaskObjectDic.taskDic[keyArray[section]]!.count
         }
     
-    /*func handleCellColor(tableView: UITableView){
-        let indexPath: IndexPath
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
-
-        if taskArray[indexPath.row].taskPriority == 2
-        {
-            cell.backgroundColor = .yellow
-        }
-        else if taskArray[indexPath.row].taskPriority == 1
-        {
-            cell.backgroundColor = .red
-        }
-    }*/
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskTableViewCell
@@ -148,11 +148,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if taskArray[indexPath.row].taskPriority == 2
         {
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = medPriCol
         }
         else if taskArray[indexPath.row].taskPriority == 1
         {
-            cell.backgroundColor = .red
+            cell.backgroundColor = highPriCol
         }
         
         cell.taskTitleLabel.text = text
@@ -167,11 +167,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         if taskArray[indexPath.row].taskPriority == 2
         {
-            cell.backgroundColor = .yellow
+            cell.backgroundColor = medPriCol
         }
         else if taskArray[indexPath.row].taskPriority == 1
         {
-            cell.backgroundColor = .red
+            cell.backgroundColor = highPriCol
         }
         
     }
@@ -186,11 +186,11 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if (taskArray.indices.contains(indexPath.row)){
             if taskArray[indexPath.row].taskPriority == 2
                 {
-                    cell.backgroundColor = .yellow
+                    cell.backgroundColor = medPriCol
                 }
                 else if taskArray[indexPath.row].taskPriority == 1
                 {
-                    cell.backgroundColor = .red
+                    cell.backgroundColor = highPriCol
                 }
             }
         }
@@ -305,9 +305,10 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             uDefault.set(encodedData, forKey: "eventDic")
             
+            self.updateBool = true
+            
         }
         delete.backgroundColor = .green
-        
         
         return [delete, modify]
     }
