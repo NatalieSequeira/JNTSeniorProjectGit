@@ -468,7 +468,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Calendar" image="calendar" selectedImage="calendar" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="calendarView" destination="Y7R-hY-sDQ" id="kZP-Wg-rpp"/>
                         <outlet property="month" destination="2Lh-dc-fST" id="hBe-PR-JfC"/>
@@ -569,7 +569,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="evG-ef-GVR"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Tasks" image="first" id="x2O-yx-IyZ"/>
+                    <tabBarItem key="tabBarItem" title="Tasks" image="list" selectedImage="list" id="x2O-yx-IyZ"/>
                     <connections>
                         <outlet property="tableView" destination="lrc-xi-qQh" id="Prv-Tf-ekz"/>
                     </connections>
@@ -580,8 +580,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calendar" width="30" height="30"/>
         <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="list" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mwE-JI-UDc"/>

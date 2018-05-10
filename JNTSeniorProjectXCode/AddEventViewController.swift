@@ -208,7 +208,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         var trigger:UNNotificationTrigger
         
         let content = UNMutableNotificationContent()
-        content.title = ("\(userTitle!) \(myDateFormatter.string(from: myDatePicker.date))")
+        content.title = ("\(userTitle!) | Due: \(myDateFormatter.string(from: myDatePicker.date))")
         content.body = userDescription!
         content.sound = UNNotificationSound.default()
         

@@ -145,8 +145,11 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
         
         var trigger:UNNotificationTrigger
         
+        myDateFormatter.dateFormat = "MM-dd"
+
+        
         let content = UNMutableNotificationContent()
-        content.title = updatedTitle!
+        content.title = ("\(updatedTitle!) | Due: \(myDateFormatter.string(from: TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDate))")
         content.body = updatedDescription!
         content.sound = UNNotificationSound.default()
         
