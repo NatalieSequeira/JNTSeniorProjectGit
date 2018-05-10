@@ -165,6 +165,13 @@ class AddEventViewController: UIViewController {
     
     func reminders(){
         
+        let myDateFormatter = DateFormatter()
+        let myLocale = NSLocale.autoupdatingCurrent;
+        
+        myDateFormatter.locale = myLocale
+        
+        myDateFormatter.dateFormat = "yyyy MM dd"
+        
         notificationCenter.requestAuthorization(options: options) {
             (granted, error) in
             if !granted {
@@ -178,24 +185,103 @@ class AddEventViewController: UIViewController {
             }
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30,
-                                                        repeats: false)
-        
+        var trigger:UNNotificationTrigger
+       /* var dateComponents = DateComponents()
+        dateComponents.hour = 10
+        dateComponents.minute = 30
+        trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)*/
         
         let content = UNMutableNotificationContent()
         content.title = userTitle!
         content.body = userDescription!
         content.sound = UNNotificationSound.default()
         
+        let daysDouble = (round(myDatePicker.date.timeIntervalSinceNow/86400))
         
-        let identifier = "UYLLocalNotification"
+        var triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: Date())
+        triggerDate.hour = 9
+        triggerDate.minute = 30
+        var eventDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: myDatePicker.date)
+        eventDate.hour = 9
+        eventDate.minute = 30
+
+        
+        if myDatePicker.date.timeIntervalSinceNow > 345600.00 {
+            if userPriority == 1
+            {
+                let days = Int(daysDouble/2)
+
+                for i in 1...days
+                {
+                    triggerDate.day! += 2
+                    if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
+                    {
+                        trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
+                    }else{
+                        trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                    }
+                    let highPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
+                    let highPrReq = UNNotificationRequest(identifier: highPriId, content: content, trigger: trigger)
+                    notificationCenter.add(highPrReq, withCompletionHandler: {(error) in
+                        if let highPriError = error {
+                            //something went wrong
+                        }
+                    })
+                }
+            }
+            else if userPriority == 2
+            {
+                let days = Int(daysDouble/3)
+                for i in 1...days
+                {
+                    triggerDate.day! += 3
+                    if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
+                    {
+                        trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
+                    }else{
+                        trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                    }
+                    let highPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
+                    let highPrReq = UNNotificationRequest(identifier: highPriId, content: content, trigger: trigger)
+                    notificationCenter.add(highPrReq, withCompletionHandler: {(error) in
+                        if let highPriError = error {
+                            //something went wrong
+                        }
+                    })
+                }
+            }
+            else if userPriority == 3
+            {
+                let days = Int(daysDouble/4)
+                for i in 1...days
+                {
+                    triggerDate.day! += 4
+                    if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
+                    {
+                        trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
+                    }else{
+                        trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                    }
+                    let highPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
+                    let highPrReq = UNNotificationRequest(identifier: highPriId, content: content, trigger: trigger)
+                    notificationCenter.add(highPrReq, withCompletionHandler: {(error) in
+                        if let highPriError = error {
+                            //something went wrong
+                        }
+                    })
+                }
+            }
+        }
+        
+        
+       /* let identifier = "UYLLocalNotification"
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content, trigger: trigger)
         notificationCenter.add(request, withCompletionHandler: { (error) in
             if let error = error {
                 // Something went wrong
             }
-        })
+        })*/
         
         
     }
