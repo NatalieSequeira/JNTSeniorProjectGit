@@ -33,13 +33,14 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
+    //func to dismiss keyboard when return key is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.updateTitleField.resignFirstResponder()
         
         self.updateDescriptionField.resignFirstResponder()
         
         return true
-    }
+    }//end func
     
 
     override func didReceiveMemoryWarning() {
@@ -50,41 +51,46 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
     var updatedTitle: String?
     var updatedDescription: String?
     
+    //func to dismiss the view controller if user decided not to update anything
     @IBAction func cancelPopover(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
+    }//end func
     
-    
+    //func to store the new title
     @IBAction func updateTitleFieldChanged(_ sender: Any) {
         if (updateTitleField.text != nil){
             updatedTitle = updateTitleField.text!
         }else{
             updatedTitle = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
         }
-    }
+    }//end func
     
+    //func to store the new description
     @IBAction func updateDescriptionFieldChanged(_ sender: Any) {
         if (updateDescriptionField.text != nil){
             updatedDescription = updateDescriptionField.text!
         }else{
             updatedDescription = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
         }
-    }
+    }//end func
     
+    //func to updated the task
     @IBAction func updateComplete(_ sender: Any) {
         
+        //if the title field is blank, set it to what it already was
         if updatedTitle != nil {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle = updatedTitle
-        }else{
+        }else{//else set it to the updated title
             updatedTitle = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskTitle
         }
 
+        //if the description is blank, set it to what it already was
         if updatedDescription != nil {
             TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription = updatedDescription
-        }else{
+        }else{//else set it to the updated description
             updatedDescription = TaskObjectDic.taskDic[dateKey.key]![modifiedIndex.index].taskDescription
 
-        }
+        }//end if
         
     
         //notifications
@@ -132,6 +138,7 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        //delete the current notifications for the event, as a new title or description needs to be reflected
         if (deleteDates > 0){
             for i in 1...deleteDates
             {
@@ -141,11 +148,11 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
         
         
         
-        
+        //Remake the notifications with the updated title/description
         
         var trigger:UNNotificationTrigger
         
-        myDateFormatter.dateFormat = "MM-dd"
+        myDateFormatter.dateFormat = "M-dd"
 
         
         let content = UNMutableNotificationContent()
@@ -287,7 +294,7 @@ class TaskUpdateViewController: UIViewController, UITextFieldDelegate {
         
         uDefault.set(encodedData, forKey: "eventDic")
         self.dismiss(animated: true, completion: nil)
-    }
+    }//end func
     
     func dateFixer(day: Int,month: Int) -> Array<Int>
     {

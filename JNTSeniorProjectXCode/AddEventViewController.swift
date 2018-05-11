@@ -16,6 +16,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Initializing variables to be used in textfields and the datepicker
         titleTextField.delegate = self
         descriptionTextField.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
@@ -38,7 +39,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var myDatePicker: UIDatePicker!
     
     // Bad Name, this label shows the date after it's been picked using myDatePicker.
-    @IBOutlet weak var testLabel: UILabel!
+    //@IBOutlet weak var testLabel: UILabel!
     
     // TextField for users to put a title for event
     @IBOutlet weak var titleTextField: UITextField!
@@ -54,14 +55,14 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var PriorityChooser: UISegmentedControl!
     
-    
+    //Function to dismiss the keyboard when the return key is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.titleTextField.resignFirstResponder()
         
         self.descriptionTextField.resignFirstResponder()
         
         return true
-    }
+    }//end function
     
     
     
@@ -82,25 +83,26 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     let notificationCenter = UNUserNotificationCenter.current()
     let options: UNAuthorizationOptions = [.badge, .alert, .sound];
     
-    
+    //Function to dismiss the screen if user decides not to add an event
     @IBAction func cancelPopover(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
+    }//end function
     
+    //function to present the date picker
     @IBAction func bringUpDatePicker(_ sender: Any) {
         view.endEditing(true)
         myDatePicker.isHidden = false
-    }
+    }//end function
     
-    
+    //function to store the text field once text is added
     @IBAction func titleTextFieldChanged(_ sender: Any) {
         userTitle = titleTextField.text!
-    }
+    }//end function
     
-    
+    //function to store the text field once text is added
     @IBAction func descriptionTextFieldChanged(_ sender: Any) {
         userDescription = descriptionTextField.text!
-    }
+    }//end function
     
     //Choose the Priority
     
@@ -122,7 +124,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         {
             userPriority = 3
         }
-    }
+    }//end function
     
     // Add the Event to the Calendar
     @IBAction func buttonPressed(_ sender: Any) {
@@ -147,9 +149,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         }
         else{
             
+            //if there is no text replace it with a space
             if (userDescription == nil || userDescription == ""){
                 userDescription = " "
-            }
+            }//end if
             
             self.dismiss(animated: true, completion: nil)            
             
@@ -168,7 +171,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                 TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = keyDate
             } else {
                 TaskObjectDic.taskDic[myDateFormatter.string(from: myDatePicker.date)] = [EventTaskObject]
-            }
+            }//end if
             
             //To store the data, we must first encode our dictionary with the key "eventDic"
             let uDefault = UserDefaults.standard
@@ -181,8 +184,9 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         }
         
         
-    }
+    }//end function
     
+    //function to create notifications
     func reminders(){
         
         let myDateFormatter = DateFormatter()
@@ -192,6 +196,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         myDateFormatter.dateFormat = "M-dd"
         
+        //get permission to send notifications
         notificationCenter.requestAuthorization(options: options) {
             (granted, error) in
             if !granted {
@@ -205,8 +210,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
+        //begin construction the base notification
         var trigger:UNNotificationTrigger
         
+        //set the content of the notification to the event title and description
         let content = UNMutableNotificationContent()
         content.title = ("\(userTitle!) | Due: \(myDateFormatter.string(from: myDatePicker.date))")
         content.body = userDescription!
@@ -214,12 +221,14 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         myDateFormatter.dateFormat = "yyyy MM dd HH mm ss SSSS"
         
+        //get how many days between now and the event date
         var daysDouble = (round(myDatePicker.date.timeIntervalSinceNow/86400))
         if daysDouble <= 0{
             daysDouble = 1 
         }
         
         
+        //set the trigger date to today
         var triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: Date())
         triggerDate.hour = 9
         triggerDate.minute = 30
@@ -231,27 +240,31 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         var fixedArray:Array<Int> = []
 
-        
+        // if the event is more than a week out, notifiy them based off priorities
         if myDatePicker.date.timeIntervalSinceNow > 604800.00 {
+            //check if high priority
             if userPriority == 1
             {
+                //find how how many events to send
                 let days = Int(daysDouble/2)
 
+                //for said events, add one every two days
                 for i in 1...days
                 {
                     triggerDate.day! += 2
                     
-                    //running a function to check if the days surpassed the month, then updating the month
+                    //running a function to check if the days surpassed the month, then update the month
                     fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
                     triggerDate.day = fixedArray[1]
                     triggerDate.month = fixedArray[0]
                     
+                    //check to see if the trigger date has surpassed the event day
                     if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                     {
                         trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
                     }else{
                         trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                    }
+                    }//end if
                     let highPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
                     let highPrReq = UNNotificationRequest(identifier: highPriId, content: content, trigger: trigger)
                     notificationCenter.add(highPrReq, withCompletionHandler: {(error) in
@@ -259,25 +272,30 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                             //something went wrong
                         }
                     })
-                }
-            }
+                }//end for
+            }//end if
+            //check if medium priority
             else if userPriority == 2
             {
+                //find how how many events to send
                 let days = Int(daysDouble/3)
+                //for said events, add one every three days
                 for i in 1...days
                 {
                     triggerDate.day! += 3
 
+                    //running a function to check if the days surpassed the month, then update the month
                     fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
                     triggerDate.day = fixedArray[1]
                     triggerDate.month = fixedArray[0]
                     
+                    //check to see if the trigger date has surpassed the event day
                     if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                     {
                         trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
                     }else{
                         trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                    }
+                    }//end if
                     let medPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
                     let medPrReq = UNNotificationRequest(identifier: medPriId, content: content, trigger: trigger)
                     notificationCenter.add(medPrReq, withCompletionHandler: {(error) in
@@ -285,11 +303,14 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                             //something went wrong
                         }
                     })
-                }
-            }
+                }//end for
+            }//end if
+            //check if low priority
             else if userPriority == 3
             {
+                //find out how many events to send
                 let days = Int(daysDouble/4)
+                //for said events, add one every four days
                 for i in 1...days
                 {
                     triggerDate.day! += 4
@@ -298,12 +319,13 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                     triggerDate.day = fixedArray[1]
                     triggerDate.month = fixedArray[0]
                     
+                    //check to see if the trigger date has surpassed the event day
                     if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                     {
                         trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
                     }else{
                         trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                    }
+                    }//end if
                     let lowPriId = (myDateFormatter.string(from: myDatePicker.date) + "\(i)")
                     let lowPrReq = UNNotificationRequest(identifier: lowPriId, content: content, trigger: trigger)
                     notificationCenter.add(lowPrReq, withCompletionHandler: {(error) in
@@ -311,18 +333,24 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                             //something went wrong
                         }
                     })
-                }
-            }
+                }//end for
+            }//end if
+            
+        //if the event is less than a week out, remind every day
         }else{
+            //find how many events to create
             let days = Int(daysDouble)
+            //for said events, make one every day
             for i in 1...days
             {
                 triggerDate.day! += 1
                 
+                //fix dates if passing a month
                 fixedArray = dateFixer(day: triggerDate.day!, month: triggerDate.month!)
                 triggerDate.day = fixedArray[1]
                 triggerDate.month = fixedArray[0]
                 
+                //check to see if the trigger date has surpassed the event day
                 if (triggerDate.month! >= eventDate.month! && triggerDate.day! >= eventDate.day!)
                 {
                     trigger = UNCalendarNotificationTrigger(dateMatching: eventDate, repeats: false)
@@ -336,11 +364,12 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                         //something went wrong
                     }
                 })
-            }
+            }//end for
             
-        }
-    }
+        }//end if
+    }//end func
     
+    //func to check if a date passed a month
     func dateFixer(day: Int,month: Int) -> Array<Int>
     {
         var nDay = day
@@ -442,7 +471,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         }
         
         return [nMonth,nDay]
-    }
+    }//end func
     
     
 }

@@ -15,13 +15,16 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var DoneButton: UIButton!
     
+    //array to hold tasks
     var taskArray:Array<TaskObject> = []
+    //set up colors for priorites
     let highPriCol = UIColor(red: 255, green: 73/255, blue: 73/255, alpha: 0.95)
     let medPriCol = UIColor(red: 255, green: 243/255, blue: 117/255, alpha: 0.95)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set the task array to the array in the dictionary with the specified date key
         taskArray = TaskObjectDic.taskDic[dateKey.key]!
         
         tableView.delegate = self
@@ -33,14 +36,15 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.reloadData()
     }
     
+    //set up how many rows are needed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(taskArray.count)
         return taskArray.count
-    }
+    }//end func
     
+    
+    //func to set up each row with text and color
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Heyo")
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
         
         let text = taskArray[indexPath.row].taskTitle
@@ -57,8 +61,9 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.taskTitleLabel.text = text
         
         return cell
-    }
+    }//end func
     
+    //handle the row when not on screen
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
         
@@ -71,8 +76,9 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             cell.backgroundColor = highPriCol
         }
         
-    }
+    }//end func
     
+    //handle the row when not on screen
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! DateDetsTableViewCell
         
@@ -87,7 +93,7 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
                 cell.backgroundColor = highPriCol
             }
         }
-    }
+    }//end func
     
     
     //Select Cell to read description
@@ -125,8 +131,10 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         let modify = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
             //print("Modify button tapped")
             
+            //set the modified index struct to the current row
             modifiedIndex.index = indexPath.row
             
+            //popover to the task update view controller
             let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "Task Update View Controller") as UIViewController?
             let navigation = UINavigationController(rootViewController: popoverContent!)
             navigation.modalPresentationStyle = UIModalPresentationStyle.popover
@@ -146,7 +154,7 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
         let delete = UITableViewRowAction(style: .destructive, title: "Complete") { action, index in
             
                         
-            
+            //set up notification settings for deleting notifications
             let notificationCenter = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.badge, .alert, .sound];
             let myDateFormatter = DateFormatter()
@@ -181,6 +189,7 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
             if deleteDates <= 0
             {deleteDates = 1}
             
+            //find out how many events were made in the first place to delete
             if fireDate.timeIntervalSince(madeDate) > 604800.00
             {
                 if TaskObjectDic.taskDic[dateKey.key]![indexPath.row].taskPriority == 1
@@ -193,12 +202,13 @@ class DateDetsViewController: UIViewController, UITableViewDelegate, UITableView
                 {
                     deleteDates = Int(deleteDatesDouble/4)
                 }
-            }
+            }//end if
             
+            //delete the events
             for i in 1...deleteDates
             {
                 notificationCenter.removePendingNotificationRequests(withIdentifiers: ([myDateFormatter.string(from: fireDate) + "\(i)"]) )
-            }
+            }//end for
 
 
             /*Remove the event from the array, then override the value in the
