@@ -1,6 +1,6 @@
 # JNTSeniorProjectGit
-# Jack Demm, Natalie Sequeira, Thomas Zorn
-# Due-It!
+Jack Demm, Natalie Sequeira, Thomas Zorn
+Due-It!
 
 # GETTING STARTED
 
@@ -22,7 +22,7 @@ That should be it for installing Cocoapods, you can open Xcode again, where you 
 
 # HOW TO RUN
 
-#Running Due-It! (OPTION 1 - running in XCode on a simulator)
+# Running Due-It! (OPTION 1 - running in XCode on a simulator)
 
 1. Install cocoapods and JT Apple Calendar using the directions in the “Getting Started” section of this document. 
 2. Download the source code provided in moodle (or clone it from GitHub)
@@ -30,7 +30,7 @@ That should be it for installing Cocoapods, you can open Xcode again, where you 
 4. Build the project by doing the shortcut ‘Command + b.’ After the build succeeds you can hit either the play button at the top left of the screen in XCode, or you can do the command ‘Command + r’ to run the app.
 5.A simulator will open with the app running and you’re good to go!
 
-#Running Due-It! (OPTION 2 - On your own device)
+# Running Due-It! (OPTION 2 - On your own device)
 1. A file has been included in both hand-ins on moodle (source code & final executables) called “DueIt.ipa.” Download that file and place it somewhere convenient (you will need this to be easily accessible)
 2. Plug your iOS device into you MacBook. 
 3. Open an instance of XCode. You don’t need to start a new project for this.
